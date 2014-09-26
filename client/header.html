@@ -1,0 +1,43 @@
+<template name='layout'>
+  {{> yield region='top'}}
+  {{> yield}}
+</template>
+
+<template name='login_page'>
+  {{> banner_loginpage}}
+  <br />
+  {{> login_panel}}
+</template>
+
+<template name='header'>
+  <header class='am-topbar am-topbar-fixed-top'>
+    <h1 class='am-topbar-brand'>
+      <a href='#' id='topbar_btn_home'><fa>&#xf004;</fa><mw>PlotiPot</mw></a>
+    </h1>
+
+    <button class='am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only' data-am-collapse='{target: "#collapse-head"}'><span class='am-sr-only'>导航切换</span> <span class='am-icon-bars'></span></button>
+    <div class='am-collapse am-topbar-collapse' id='collapse-head'>
+      <ul class='am-nav am-nav-pills am-topbar-nav'>
+        <li><a id='topbar_btn_home' href='#'>首页</a></li>
+        <li><a id='topbar_btn_explore' href='#'>随便看看</a></li>
+      </ul>
+
+      {{#if logged_in}}
+      <div class='am-topbar-right am-dropdown' data-am-dropdown='{boundary: ".am-topbar"}'>
+        <button class='am-btn am-btn-secondary am-topbar-btn am-btn-sm am-dropdown-toggle' data-am-dropdown-toggle>{{cur_username}} <span class='am-icon-caret-down'></span></button>
+        <ul class='am-dropdown-content'>
+          <li><a href='#' id='topbar_btn_logout'>退出帐号</a></li>
+        </ul>
+      </div>
+      {{else}}
+      <div class='am-topbar-right'>
+        <button id='topbar_btn_register' class='am-btn am-btn-secondary am-topbar-btn am-btn-sm'><span class='am-icon-pencil'></span> 注册</button>
+      </div>
+
+      <div class='am-topbar-right'>
+        <button id='topbar_btn_login' class='am-btn am-btn-primary am-topbar-btn am-btn-sm'><span class='am-icon-user'></span> 登录</button>
+      </div>
+      {{/if}}
+    </div>
+  </header>
+</template>
