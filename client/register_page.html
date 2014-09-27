@@ -1,0 +1,43 @@
+<template name='register_page'>
+  {{> banner_register}}
+  <br />
+  {{> register_panel}}
+</template>
+
+<template name='banner_register'>
+  <div class='banner-container' style='background-image: url(banner_register.svg); text-align: right;'>
+    <div class='title-big-mainpage'>注册</div>
+    <br />
+    <div class='title-small'>TODO: Add something here</div>
+    <div style='padding-top: 36px;'></div>
+  </div>
+</template>
+
+<template name='register_panel'>
+  <div class='am-g'>
+    <div class='col-lg-6 col-md-8 col-sm-centered'>
+      <form method='post' class='am-form'>
+        <label for='username'>用户名:</label>
+        <input type='text' name='' id='username' placeholder='可以输入中、英文字符、下划线以及数字' value=''>
+        <br />
+        <label for='email'>邮箱:</label>
+        <input type='email' name='' id='email' value=''>
+        <br />
+        <label for='password'>密码:</label>
+        <input type='password' name='' id='password' value=''>
+        <br />
+        <label for='password'>重复密码:</label>
+        <input type='password' name='' id='password_again' value=''>
+        <br />
+        <span style='color: red'>{{err_message}}</span>
+        <br />
+        <div class='am-cf'>
+          <input type='button' name='' id='btn_register' value='注册' class='am-btn am-btn-primary am-btn-sm am-fl'>
+          <input type='button' name='' id='btn_goto_login' value='已经拥有帐号？' class='am-btn am-btn-default am-btn-sm am-fr'>
+        </div>
+      </form>
+      <hr />
+      <p>注册即说明你同意我们的隐私政策。</p>
+    </div>
+  </div>
+</template>

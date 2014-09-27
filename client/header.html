@@ -3,12 +3,6 @@
   {{> yield}}
 </template>
 
-<template name='login_page'>
-  {{> banner_loginpage}}
-  <br />
-  {{> login_panel}}
-</template>
-
 <template name='header'>
   <header class='am-topbar am-topbar-fixed-top'>
     <h1 class='am-topbar-brand'>
@@ -18,24 +12,38 @@
     <button class='am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-secondary am-show-sm-only' data-am-collapse='{target: "#collapse-head"}'><span class='am-sr-only'>导航切换</span> <span class='am-icon-bars'></span></button>
     <div class='am-collapse am-topbar-collapse' id='collapse-head'>
       <ul class='am-nav am-nav-pills am-topbar-nav'>
-        <li><a id='topbar_btn_home' href='#'>首页</a></li>
-        <li><a id='topbar_btn_explore' href='#'>随便看看</a></li>
+        <li><a id='topbar_btn_home' href='{{pathFor "home_page"}}'>首页</a></li>
+        <li><a id='topbar_btn_explore' href='{{pathFor "explore_page"}}'>随便看看</a></li>
       </ul>
 
-      {{#if logged_in}}
-      <div class='am-topbar-right am-dropdown' data-am-dropdown='{boundary: ".am-topbar"}'>
-        <button class='am-btn am-btn-secondary am-topbar-btn am-btn-sm am-dropdown-toggle' data-am-dropdown-toggle>{{cur_username}} <span class='am-icon-caret-down'></span></button>
-        <ul class='am-dropdown-content'>
-          <li><a href='#' id='topbar_btn_logout'>退出帐号</a></li>
+      <!--
+        哇咔咔！！！Meteor（确切地说，是Spacebars和Blaze）又一个巨大无比的坑被我搞定了～～成就感爆棚有木有啊啊啊～～～
+        无论如何下面那个<a>标签一定要保留，也就是说，要放在{{#if}}外面。
+        否则这玩意会被重新创建（瞧Spacebars他们干的好事），但不能被AmazeUI检测到，也就没有了amui.js帮我们弄的下拉菜单。
+      -->
+      <div class='am-topbar-right' data-am-dropdown='{boundary: ".am-topbar"}'>
+        <ul class='am-nav am-nav-pills am-topbar-nav'>
+          <li id='user_dropdown' class='am-dropdown' data-am-dropdown>
+            <a class='am-dropdown-toggle' data-am-dropdown-toggle href='#'>
+              {{#if logged_in}}
+              {{cur_username}} <span class='am-icon-caret-down'></span>
+              {{/if}}
+            </a>
+            <ul class='am-dropdown-content'>
+              {{#if logged_in}}
+              <li><a href='#' id='topbar_btn_logout'>退出帐号</a></li>
+              {{/if}}
+            </ul>
+          </li>
         </ul>
       </div>
+      {{#if logged_in}}
       {{else}}
       <div class='am-topbar-right'>
-        <button id='topbar_btn_register' class='am-btn am-btn-secondary am-topbar-btn am-btn-sm'><span class='am-icon-pencil'></span> 注册</button>
+        <button id='topbar_btn_login' class='am-btn am-btn-secondary am-topbar-btn am-btn-sm'><span class='am-icon-user'></span> 登录</button>
       </div>
-
       <div class='am-topbar-right'>
-        <button id='topbar_btn_login' class='am-btn am-btn-primary am-topbar-btn am-btn-sm'><span class='am-icon-user'></span> 登录</button>
+        <button id='topbar_btn_register' class='am-btn am-btn-primary am-topbar-btn am-btn-sm'><span class='am-icon-pencil'></span> 注册</button>
       </div>
       {{/if}}
     </div>
