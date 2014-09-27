@@ -12,6 +12,7 @@ Template.register_panel.events
     Meteor.call 'check_username_availability', document.getElementById('username').value, (err, available) ->
       Session.set 'register_err_msg', if available then '' else '用户名已存在 T^T 换一个吧'
   'click #btn_register': ->
+    if not check_password() then return
     # 创建新用户
     Accounts.createUser
       username: document.getElementById('username').value
@@ -21,6 +22,7 @@ Template.register_panel.events
         if err isnt undefined
           Session.set 'register_err_msg', err.toString()
         else
+          Session.set 'username', Meteor.user().username
           Router.go '/'
   'blur #password_again': -> check_password()
   'click #btn_goto_login': -> Router.go '/login'
