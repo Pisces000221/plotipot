@@ -15,3 +15,8 @@ Router.map ->
     layoutTemplate: 'layout'
     yieldTemplates:
       'header': to: 'top'
+  @route 'all_roots',
+    path: '/explore'
+    layoutTemplate: 'layout'
+    yieldTemplates:
+      'header': to: 'top'
