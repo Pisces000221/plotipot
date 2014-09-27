@@ -1,6 +1,7 @@
 Session.setDefault 'username', ''
 
 Template.registerHelper 'logged_in', -> Meteor.userId() isnt null
+Template.registerHelper 'logging_in', -> Meteor.loggingIn()
 Template.registerHelper 'cur_username', -> Session.get 'username'
 
 Template.header.events

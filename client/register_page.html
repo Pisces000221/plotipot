@@ -33,6 +33,9 @@
         <br />
         <div class='am-cf'>
           <input type='button' name='' id='btn_register' value='注册' class='am-btn am-btn-primary am-btn-sm am-fl'>
+          {{#if logging_in}}
+          &nbsp;&nbsp;<i class='am-icon-spinner am-icon-spin'></i>
+          {{/if}}
           <input type='button' name='' id='btn_goto_login' value='已经拥有帐号？' class='am-btn am-btn-default am-btn-sm am-fr'>
         </div>
       </form>
