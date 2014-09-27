@@ -2,7 +2,12 @@ Session.setDefault 'username', ''
 
 Template.registerHelper 'logged_in', -> Meteor.userId() isnt null
 Template.registerHelper 'logging_in', -> Meteor.loggingIn()
-Template.registerHelper 'cur_username', -> Session.get 'username'
+Template.registerHelper 'cur_username', ->
+  stored = Session.get 'username'
+  if Meteor.userId() isnt null
+    if stored isnt '' then stored
+    else name = Meteor.user().username; Session.set 'username', name; name
+  else ''
 
 Template.header.events
   'click #topbar_btn_register': -> Router.go '/register'
