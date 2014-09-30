@@ -20,7 +20,7 @@
   {{#each hottest_5}}
   <mw>
     <p><h1>{{title}}</h1></p>
-    <p>创作者 xxx | 访问 {{visits}} 次</p>
+    <p>创作者 {{author_name}} | 访问 {{visits}} 次</p>
   </mw>
   {{/each}}
   <br/>
@@ -28,7 +28,7 @@
   {{#each newest_5}}
   <mw>
     <p><h1>{{title}}</h1></p>
-    <p>创作者 xxx | 创建于 {{timestamp_readable}}</p>
+    <p>创作者 {{author_name}} | 创建于 {{timestamp_readable}}</p>
   </mw>
   {{/each}}
 </template>
