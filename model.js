@@ -2,3 +2,4 @@
 // CoffeeScript定义全局变量不方便，所以使用Javascript
 
 Roots = new Meteor.Collection('roots');
+Nodes = new Meteor.Collection('nodes');

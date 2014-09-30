@@ -59,3 +59,11 @@ body {
 span.detailed_info {
   color: #c0c0c0;
 }
+
+p.root_details_title {
+  font-size: 54px;
+}
+
+p.root_details_desc {
+  font-size: 24px;
+}
