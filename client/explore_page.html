@@ -1,36 +1,36 @@
 <template name='explore'>
   {{> banner_explore}}
-  <br/><br/>
+  <br><br>
   {{> explore_display}}
-  <br/><br/>
+  <br><br>
   {{> footer}}
 </template>
 
 <template name='banner_explore'>
   <div class='banner-container' style='background-image: url(banner_explore.svg)'>
     <div class='title-big-mainpage'>随便逛逛</div>
-    <br/>
+    <br>
     <div class='title-small'>热门、最新、好评最多……你需要的一切都在这里。</div>
     <div style='padding-top: 80px;'></div>
   </div>
 </template>
 
 <template name='explore_display'>
-  <span class='title-small'><i class='fa fa-fire'></i> 时下最火 Top 5</span><hr/>
+  <span class='title-small'><i class='fa fa-fire'></i> 时下最火 Top 5</span><hr>
   {{#each hottest_5}}
-  <mw><p>
+  <mw>
     <h1>{{title}}</h1>
     <span class='detailed_info'>创作者 {{author_name}} | 访问 {{visits}} 次</span>
-    {{description}}
-  </p></mw><br/>
+    <p>{{description}}</p>
+  </mw><br>
   {{/each}}
-  <br/>
-  <span class='title-small'><i class='fa fa-star'></i> 最新 Top 5</span><hr/>
+  <br>
+  <span class='title-small'><i class='fa fa-star'></i> 最新 Top 5</span><hr>
   {{#each newest_5}}
-  <mw><p>
+  <mw>
     <h1>{{title}}</h1>
     <span class='detailed_info'>创作者 {{author_name}} | 创建于 {{timestamp_readable}}</span>
-    {{description}}
-  </p></mw><br/>
+    <p>{{description}}</p>
+  </mw><br>
   {{/each}}
 </template>

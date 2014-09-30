@@ -1,15 +1,15 @@
 <template name='new_root'>
   {{> banner_new_root}}
-  <br/><br/>
+  <br><br>
   {{> new_root_panel}}
-  <br/><br/>
+  <br><br>
   {{> footer}}
 </template>
 
 <template name='banner_new_root'>
   <div class='banner-container' style='background-image: url(banner_new_root.svg)'>
     <div class='title-big-mainpage'>开坑</div>
-    <br/>
+    <br>
     <div class='title-small'>你的文做好被各种奇葩情节充满的觉悟了吗？</div>
     <div style='padding-top: 80px;'></div>
   </div>
@@ -19,15 +19,15 @@
   <div class='am-g'>
     <div class='col-lg-9 col-md-8 col-sm-centered'>
       <form method='post' class='am-form'>
-        <label for='username'>总标题</label>
+        <label for='title'>总标题</label>
         <input type='text' name='' id='title' value=''>
-        <br />
+        <br>
         <label for='description'>简介/主线剧情提要</label>
         <textarea class='' rows='5' id='description'></textarea>
-        <br />
+        <br>
         <label for='keywords'>标签</label>
         <input type='text' name='' id='keywords' value=''>
-        <br />
+        <br>
         <div class='am-cf'>
           <input type='button' name='' id='btn_newroot_submit' value='做好觉悟，走起！' class='am-btn am-btn-primary am-btn-sm am-fl'>
           {{#if in_progress}}
@@ -35,8 +35,8 @@
           {{/if}}
         </div>
       </form>
-      <hr />
-      <p>注册即说明你同意我们的隐私政策。</p>
+      <hr>
+      <p>* 不用担心弃坑的问题，因为其他网友可能会帮你把它写下去！</p>
     </div>
   </div>
 </template>
