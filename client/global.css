@@ -8,16 +8,15 @@
 mw {
   font-family: Merriweather Sans;
 }
-
-@font-face {
-    font-family: FontAwesome;
-    src: url('webfonts/fontawesome-webfont.woff');
-}
 fa {
   font-family: FontAwesome;
 }
 
 /* HTML styles */
+body {
+  padding-top: 51px;
+}
+
 .banner-container {
   width: 100%;
   background: none no-repeat scroll center center / cover;

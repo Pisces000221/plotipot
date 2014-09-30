@@ -1,10 +1,10 @@
 Session.setDefault 'username', ''
 
-Template.registerHelper 'logged_in', -> Meteor.userId() isnt null
+Template.registerHelper 'logged_in', -> Meteor.userId()?
 Template.registerHelper 'logging_in', -> Meteor.loggingIn()
 Template.registerHelper 'cur_username', ->
   stored = Session.get 'username'
-  if Meteor.userId() isnt null
+  if Meteor.userId()?
     if stored isnt '' then stored
     else name = Meteor.user().username; Session.set 'username', name; name
   else ''

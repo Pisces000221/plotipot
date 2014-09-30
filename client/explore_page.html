@@ -16,7 +16,7 @@
 </template>
 
 <template name='explore_display'>
-  <span class='title-small'><fa>&#xF06D;</fa> 时下最火 Top 5</span><hr/>
+  <span class='title-small'><i class='fa fa-fire'></i> 时下最火 Top 5</span><hr/>
   {{#each hottest_5}}
   <mw>
     <p><h1>{{title}}</h1></p>
@@ -24,7 +24,7 @@
   </mw>
   {{/each}}
   <br/>
-  <span class='title-small'><fa>&#xF005;</fa> 最新 Top 5</span><hr/>
+  <span class='title-small'><i class='fa fa-star'></i> 最新 Top 5</span><hr/>
   {{#each newest_5}}
   <mw>
     <p><h1>{{title}}</h1></p>
