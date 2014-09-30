@@ -1,0 +1,34 @@
+<template name='explore'>
+  {{> banner_explore}}
+  <br/><br/>
+  {{> explore_display}}
+  <br/><br/>
+  {{> footer}}
+</template>
+
+<template name='banner_explore'>
+  <div class='banner-container' style='background-image: url(banner_explore.svg)'>
+    <div class='title-big-mainpage'>随便逛逛</div>
+    <br/>
+    <div class='title-small'>热门、最新、好评最多……你需要的一切都在这里。</div>
+    <div style='padding-top: 80px;'></div>
+  </div>
+</template>
+
+<template name='explore_display'>
+  <span class='title-small'><fa>&#xF06D;</fa> 时下最火 Top 5</span><hr/>
+  {{#each hottest_5}}
+  <mw>
+    <p><h1>{{title}}</h1></p>
+    <p>创作者 xxx | 访问 {{visits}} 次</p>
+  </mw>
+  {{/each}}
+  <br/>
+  <span class='title-small'><fa>&#xF005;</fa> 最新 Top 5</span><hr/>
+  {{#each newest_5}}
+  <mw>
+    <p><h1>{{title}}</h1></p>
+    <p>创作者 xxx | 创建于 {{timestamp_readable}}</p>
+  </mw>
+  {{/each}}
+</template>
