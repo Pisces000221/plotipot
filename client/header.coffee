@@ -31,6 +31,18 @@ Template.header.events
 # 由于Session会在每次页面重新加载时重设，我们用一个Session记录是否加载过AmazeUI
 Session.setDefault 'amazeui_js_loaded', 'of course not'
 
+load_script = (script_url) ->
+  script_tag = document.createElement 'script'
+  script_tag.type = 'text/javascript'
+  script_tag.src = script_url
+  document.head.appendChild script_tag
+
+load_stylesheet = (css_url) ->
+  css_tag = document.createElement 'link'
+  css_tag.rel = 'stylesheet'
+  css_tag.href = css_url
+  document.head.appendChild css_tag
+
 Template.header.created = ->
   # http://stackoverflow.com/questions/2741441/
   # 防止重复添加
@@ -40,12 +52,8 @@ Template.header.created = ->
   # 话说Meteor实在太坑爹了，自动加载Javascript的时候由于template会先于其它文件加载
   # 导致AmazeUI的库会在模板渲染完成之后载入，于是所有的效果（包括下拉菜单等）都木有了……
   #  <script type='text/javascript' src='amazeui/zepto.min.js'></script>
-  script_tag = document.createElement 'script'
-  script_tag.type = 'text/javascript'
-  script_tag.src = 'amazeui/zepto.min.js'
-  document.head.appendChild script_tag
-  script_tag = document.createElement 'script'
-  script_tag.type = 'text/javascript'
-  script_tag.src = 'http://cdn.staticfile.org/amazeui/1.0.0-beta2/js/amazeui.min.js'
-  document.head.appendChild script_tag
+  load_script 'amazeui/zepto.min.js'
+  load_script 'http://cdn.staticfile.org/amazeui/1.0.0-beta2/js/amazeui.min.js'
+  load_script 'editor/editor.js'
+  load_script 'editor/marked.js'
   Session.set 'amazeui_js_loaded', 'absolutely'

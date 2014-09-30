@@ -31,3 +31,9 @@ Router.map ->
     layoutTemplate: 'layout'
     yieldTemplates:
       'header': to: 'top'
+  @route 'create_node',
+    path: '/create_node/:_id'
+    data: -> Roots.findOne @params._id
+    layoutTemplate: 'layout'
+    yieldTemplates:
+      'header': to: 'top'

@@ -1,15 +1,38 @@
 <template name='root_details'>
+  {{> root_details_summary}}
+  <button id='btn_create_node' type='button' class='am-btn am-btn-primary'><i class='fa fa-plus'></i> 创建我的情节节点</button>
+  {{#each my_nodes}}
+    <p>{{title}}</p>
+  {{/each}}
+  <!-- <svg id='d3_canvas'></svg> -->
+</template>
+
+<template name='create_node'>
+  {{> root_details_summary}}
+  <div class='am-g'>
+    <div class='col-lg-9 col-md-8 col-sm-centered'>
+      <form method='post' class='am-form'>
+        <label for='title'>章节标题</label>
+        <input type='text' name='' id='title' value=''>
+        <br>
+        <textarea class='' rows='5' id='contents'></textarea>
+        <br>
+        <div class='am-cf'>
+          <input type='button' name='' id='btn_newnode_submit' value='去吧我的分支！' class='am-btn am-btn-primary am-btn-sm am-fl'>
+        </div>
+      </form>
+    </div>
+  </div>
+  {{> footer}}
+</template>
+
+<template name='root_details_summary'>
   <div style='text-align: center'>
-    <p class='root_details_title'>{{title}}</p>
+    <p class='root_details_title'><mw>{{title}}</mw></p>
     由 {{author_name}} 开坑
     <br>诞生于 {{timestamp_readable}}
   </div>
   <hr>
   <p class='root_details_desc'>{{{description_encoded}}}</p>
   <hr>
-  <button id='btn_create_node' type='button' class='am-btn am-btn-primary'><i class='fa fa-plus'></i> 创建我的情节节点</button>
-  {{#each my_nodes}}
-    <p>{{title}}</p>
-  {{/each}}
-  <!-- <svg id='d3_canvas'></svg> -->
 </template>
