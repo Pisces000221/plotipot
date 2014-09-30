@@ -26,13 +26,12 @@ Template.header.created = ->
   # 话说Meteor实在太坑爹了，自动加载Javascript的时候由于template会先于其它文件加载
   # 导致AmazeUI的库会在模板渲染完成之后载入，于是所有的效果（包括下拉菜单等）都木有了……
   #  <script type='text/javascript' src='amazeui/zepto.min.js'></script>
-  #  <script type='text/javascript' src='amazeui/amui.min.js'></script>
   script_tag = document.createElement 'script'
   script_tag.type = 'text/javascript'
   script_tag.src = 'amazeui/zepto.min.js'
   document.head.appendChild script_tag
   script_tag = document.createElement 'script'
   script_tag.type = 'text/javascript'
-  script_tag.src = 'amazeui/amui.min.js'
+  script_tag.src = 'http://cdn.staticfile.org/amazeui/1.0.0-beta2/js/amazeui.min.js'
   document.head.appendChild script_tag
   Session.set 'amazeui_js_loaded', 'absolutely'
