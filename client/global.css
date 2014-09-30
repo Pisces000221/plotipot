@@ -44,7 +44,7 @@ body {
   font-weight: 300;
 }
 
-#sign_up_callout {
+#sign_up_callout, #dashboard_homepage {
   text-align: center;
 }
 
@@ -54,4 +54,8 @@ body {
 
 .form-group-long {
   text-align: center;
+}
+
+span.detailed_info {
+  color: #c0c0c0;
 }
