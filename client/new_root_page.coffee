@@ -1,6 +1,7 @@
 Template.new_root_panel.events
   'click #btn_newroot_submit': ->
     Roots.insert
+      _id: Roots.find().count().toString()
       title: document.getElementById('title').value
       description: document.getElementById('description').value
       author: Meteor.userId()
