@@ -1,0 +1,10 @@
+<template name='chapter'>
+  <div style='text-align: center'>
+    <p class='root_details_title'><mw>{{root_title}}</mw></p>
+  </div>
+  <hr>
+  {{#markdown}}
+  {{contents}}
+  {{/markdown}}
+  {{> footer}}
+</template>

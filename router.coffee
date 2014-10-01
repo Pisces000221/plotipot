@@ -27,13 +27,27 @@ Router.map ->
   # 传入id的页面
   @route 'root_details',
     path: '/root_details/:_id'
-    data: -> Roots.findOne @params._id
+    data: ->
+      Meteor.subscribe 'nodes', @params._id
+      Roots.findOne @params._id
     layoutTemplate: 'layout'
     yieldTemplates:
       'header': to: 'top'
   @route 'create_node',
     path: '/create_node/:_id'
-    data: -> Roots.findOne @params._id
+    data: ->
+      Meteor.subscribe 'nodes', @params._id
+      Roots.findOne @params._id
+    layoutTemplate: 'layout'
+    yieldTemplates:
+      'header': to: 'top'
+  @route 'chapter',
+    path: '/chapter/:root_id/:_id'
+    data: ->
+      # 拉出和它一起的所有章节……
+      Meteor.subscribe 'nodes', @params.root_id
+      # 丢给页面玩去
+      Nodes.findOne @params._id
     layoutTemplate: 'layout'
     yieldTemplates:
       'header': to: 'top'
