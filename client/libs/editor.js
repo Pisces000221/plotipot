@@ -5438,7 +5438,7 @@ var CodeMirror = (function() {
         if (/\w/.test(str.charAt(i - 2)) && /[^\-?\.]/.test(str.charAt(i))) return true;
         if (i > 2 && /[\d\.,]/.test(str.charAt(i - 2)) && /[\d\.,]/.test(str.charAt(i))) return false;
       }
-      return /[~!#%&*)=+}\]|\"\.>,:;][({[<]|-[^\-?\.\u2010-\u201f\u2026]|\?[\w~`@#$%\^&*(_=+{[|><]|…[\w~`@#$%\^&*(_=+{[><]/.test(str.slice(i - 1, i + 1));
+      return /[~!#%&*)=+}\]|\"\.>,:;][({[<]|-[^\-?\.\u2010-\u201f\u2026]|\?[\w~`@#$%\^&*(_=+{[|><]|…[\w~`@#$%\^&*(_=+{[><]})]/.test(str.slice(i - 1, i + 1));
     };
 
   var knownScrollbarWidth;
@@ -6860,8 +6860,8 @@ function toggleBold(editor) {
     start = text.slice(0, startPoint.ch);
     end = text.slice(startPoint.ch);
 
-    start = start.replace(/^(.*)?(\*|\_){2}(\S+.*)?$/, '$1$3');
-    end = end.replace(/^(.*\S+)?(\*|\_){2}(\s+.*)?$/, '$1$3');
+    start = start.replace(/^(.*)?(\*|\_){2}(.*)?$/, '$1$3');
+    end = end.replace(/^(.*)?(\*|\_){2}(.*)?$/, '$1$3');
     startPoint.ch -= 2;
     endPoint.ch -= 2;
     cm.setLine(startPoint.line, start + end);
@@ -6895,8 +6895,8 @@ function toggleItalic(editor) {
     start = text.slice(0, startPoint.ch);
     end = text.slice(startPoint.ch);
 
-    start = start.replace(/^(.*)?(\*|\_)(\S+.*)?$/, '$1$3');
-    end = end.replace(/^(.*\S+)?(\*|\_)(\s+.*)?$/, '$1$3');
+    start = start.replace(/^(.*)?(\*|\_)(.*)?$/, '$1$3');
+    end = end.replace(/^(.*)?(\*|\_)(.*)?$/, '$1$3');
     startPoint.ch -= 1;
     endPoint.ch -= 1;
     cm.setLine(startPoint.line, start + end);
