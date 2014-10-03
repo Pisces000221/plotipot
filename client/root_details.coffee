@@ -21,6 +21,8 @@ Template.root_details.rendered = ->
       links.push { source: node._id, target: node._id } if node.children.length is 0
       display[node._id] =
         title: node.title
+    # 必须要把Session.get放在外面，否则Meteor不会帮我们实时更新
+    display['root_id'] = Session.get 'cur_root_id'
     draw_graph links, display
 
 # 根据提供的信息画出树形图
@@ -86,7 +88,7 @@ draw_graph = (links, display) ->
     .enter().append 'g'
       .attr 'class', 'node'
       .call force.drag
-      .on 'dblclick', (d) -> alert d.name
+      .on 'dblclick', (d) -> Router.go "/chapter/#{display['root_id']}/#{d.name}"
 
   # add the nodes
   node.append 'circle'
