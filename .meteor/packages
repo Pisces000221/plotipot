@@ -9,4 +9,5 @@ coffeescript
 iron:router
 accounts-password
 showdown
+d3
 

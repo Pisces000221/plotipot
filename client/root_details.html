@@ -4,7 +4,28 @@
   {{#each my_nodes}}
     <p><a href='{{pathFor "chapter" root_id=cur_root_id _id=_id}}'>{{title}}</a></p>
   {{/each}}
-  <!-- <svg id='d3_canvas'></svg> -->
+  <svg id='d3_canvas'></svg>
+  <!-- d3.js使用的样式 -->
+  <style>
+    .node {
+      cursor: pointer;
+    }
+    path.link {
+      fill: none;
+      stroke: #666;
+      stroke-width: 1.5px;
+    }
+    circle {
+      fill: #ccc;
+      stroke: #fff;
+      stroke-width: 1.5px;
+    }
+    text {
+      fill: #000;
+      font-size: 10px;
+      pointer-events: none;
+    }
+  </style>
 </template>
 
 <template name='create_node'>
