@@ -1,10 +1,16 @@
 <template name='chapter'>
   <div style='text-align: center'>
     <p class='root_details_title'><mw>{{root_title}}</mw></p>
+    <div class='chapter-nav-left'><a><i class='fa fa-chevron-left'></i> 0</a></div>
+    <span class='chapter_title'>{{title}}</span>
+    <div class='chapter-nav-right'><a>0 <i class='fa fa-chevron-right'></i></a></div>
+    <br>作者 {{author_name}} / {{timestamp_readable}}
   </div>
   <hr>
-  {{#markdown}}
-  {{contents}}
-  {{/markdown}}
+  <div class='chapter-contents'>
+    {{#markdown}}
+    {{contents}}
+    {{/markdown}}
+  </div>
   {{> footer}}
 </template>

@@ -21,4 +21,6 @@ Template.create_node.events
       title: document.getElementById('title').value
       contents: editor.codemirror.getValue()
       author: Meteor.userId()
+      visits: 0
+      timestamp: (new Date).getTime()
     Router.go '/root_details/' + @_id
