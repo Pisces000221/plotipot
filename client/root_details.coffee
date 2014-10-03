@@ -16,11 +16,9 @@ Template.create_node.rendered = ->
 
 Template.create_node.events
   'click #btn_newnode_submit': ->
-    Nodes.insert
+    Meteor.call 'create_node',
       root_id: @_id
       title: document.getElementById('title').value
       contents: editor.codemirror.getValue()
-      author: Meteor.userId()
-      visits: 0
-      timestamp: (new Date).getTime()
+    , (err) -> if err? then alert err.toString()
     Router.go '/root_details/' + @_id
