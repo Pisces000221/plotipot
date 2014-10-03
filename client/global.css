@@ -12,6 +12,18 @@ fa {
   font-family: FontAwesome;
 }
 
+/* Styles that can be used in every project */
+/* http://www.codeproject.com/Tips/166266/Making-Text-Upside-down-using-CSS */
+.text-upside-down
+{
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  ms-filter: 'progid:DXImageTransform.Microsoft.BasicImage(rotation=2)';
+  -moz-transform: rotate(-180deg);
+  -o-transform: rotate(-180deg);
+  -webkit-transform: rotate(-180deg);
+  position: absolute;
+}
+
 /* HTML styles */
 body {
   padding-top: 51px;
