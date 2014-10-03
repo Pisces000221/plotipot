@@ -1,4 +1,6 @@
 # Configure iron:router
+if Meteor.isClient then Session.setDefault 'forking_parent', '0'
+
 Router.map ->
   # 一般页面（没有id作为参数）
   @route 'home_page',
@@ -34,10 +36,13 @@ Router.map ->
     yieldTemplates:
       'header': to: 'top'
   @route 'create_node',
-    path: '/create_node/:_id'
+    path: '/create_node/:root_id/:node_id'
     data: ->
-      Meteor.subscribe 'nodes', @params._id
-      Roots.findOne @params._id
+      Meteor.subscribe 'nodes', @params.root_id
+      # 目前只能把数据存储在Session里吗？？
+      # 不能放在返回值里，否则会失去同步性（谁知道Meteor又干了什么坑爹的事情！）
+      if Meteor.isClient then Session.set 'forking_parent', @params.node_id
+      Roots.findOne @params.root_id
     layoutTemplate: 'layout'
     yieldTemplates:
       'header': to: 'top'

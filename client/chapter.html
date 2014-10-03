@@ -1,13 +1,13 @@
 <template name='chapter'>
   <div style='text-align: center'>
     <p class='root_details_title'><mw>{{root_title}}</mw></p>
-    <div class='chapter-nav-left'><a><i class='fa fa-chevron-left'></i> 0</a></div>
+    <div class='chapter-nav-left'><a><i class='fa fa-chevron-left'></i> {{parents_count}}</a></div>
     <span class='chapter_title'>{{title}}</span>
-    <div class='chapter-nav-right'><a>0 <i class='fa fa-chevron-right'></i></a></div>
+    <div class='chapter-nav-right'><a>{{children_count}} <i class='fa fa-chevron-right'></i></a></div>
     <br>作者 {{author_name}} / {{timestamp_readable}}<br>&nbsp;
     <div class='chapter-nav-right'><mw>
-      <button type='button' class='am-btn'><i class='fa fa-code-fork'></i> Fork</button>
-      <button type='button' class='am-btn'><i class='fa fa-code-fork text-upside-down'></i> &nbsp;&nbsp;&nbsp;Merge</button>
+      <button id='btn_fork' type='button' class='am-btn'><i class='fa fa-code-fork'></i> Fork</button>
+      <button id='btn_merge' type='button' class='am-btn'><i class='fa fa-code-fork text-upside-down'></i> &nbsp;&nbsp;&nbsp;Merge</button>
     </mw></div>
   </div>
   <hr>

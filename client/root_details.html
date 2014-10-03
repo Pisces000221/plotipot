@@ -9,6 +9,11 @@
 
 <template name='create_node'>
   {{> root_details_summary}}
+  {{#if forking_parent_node}}
+    (你正在从{{parent_node_author}}创作的{{parent_node_title}}创建新分支)
+  {{else}}
+    (注意：你没有从任何节点创建分支，你的新节点将会非常孤独，不过你可以以后再把它和别的节点连接)
+  {{/if}}
   <div class='am-g'>
     <div class='col-lg-9 col-md-8 col-sm-centered'>
       <form method='post' class='am-form'>
