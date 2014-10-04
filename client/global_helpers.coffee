@@ -4,11 +4,11 @@ Session.setDefault 'username', ''
 # Blaze你又调皮了～～～～只把< > &之类的给HTML编码一下，就是不编码换行符～～
 # 要不下次给Meteor发个PR过去？
 # https://github.com/meteor/meteor/blob/master/packages/blaze/preamble.js
-Template.registerHelper 'description_encoded', ->
-  (html_encode @description).replace /\n/g, '<br>'
-Template.registerHelper 'author_name', -> Meteor.users.findOne(@author).username
-Template.registerHelper 'timestamp_readable', -> (new Date @timestamp).toLocaleString()
-Template.registerHelper 'likes', -> @liked_by.length
+Template.registerHelper 'description_encoded', (data = this) ->
+  window.html_encode(data.description).replace /\n/g, '<br>'
+Template.registerHelper 'author_name', (data = this) -> Meteor.users.findOne(data.author).username
+Template.registerHelper 'timestamp_readable', (data = this) -> (new Date data.timestamp).toLocaleString()
+Template.registerHelper 'likes', (data = this) -> data.liked_by.length
 
 Template.registerHelper 'logged_in', -> Meteor.userId()?
 Template.registerHelper 'logging_in', -> Meteor.loggingIn()
@@ -20,6 +20,7 @@ Template.registerHelper 'cur_username', ->
   else ''
 
 ######## 全局方法 ########
+# http://stackoverflow.com/q/3032721
 # 加载Javascript和样式表的方法
 window.load_script = (script_url) ->
   script_tag = document.createElement 'script'
@@ -35,7 +36,7 @@ window.load_stylesheet = (css_url) ->
 
 # HTML编码函数，懒得用RegExp了……在Firefox和QupZilla下均可以工作。
 # http://blog.csdn.net/cuixiping/article/details/7846806
-html_encode = (s) ->
+window.html_encode = (s) ->
   div = document.createElement 'div'
   div.appendChild document.createTextNode s
   div.innerHTML

@@ -18,19 +18,11 @@
 <template name='explore_display'>
   <span class='title-small'><i class='fa fa-fire'></i> 时下最火 Top 5</span><hr>
   {{#each hottest_5}}
-  <mw>
-    <h1><a href='{{pathFor "root_details" _id=_id}}'>{{title}}</a></h1>
-    <span class='detailed_info'>创作者 {{author_name}} | 访问 {{visits}} 次</span>
-    <p>{{{description_encoded}}}</p>
-  </mw><br>
+  {{> root_link data=this show_visits=true}}
   {{/each}}
   <br>
   <span class='title-small'><i class='fa fa-star'></i> 最新 Top 5</span><hr>
   {{#each newest_5}}
-  <mw>
-    <h1><a href='{{pathFor "root_details" _id=_id}}'>{{title}}</a></h1>
-    <span class='detailed_info'>创作者 {{author_name}} | 创建于 {{timestamp_readable}}</span>
-    <p>{{{description_encoded}}}</p>
-  </mw><br>
+  {{> root_link data=this show_timestamp=true}}
   {{/each}}
 </template>

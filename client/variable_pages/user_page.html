@@ -1,0 +1,19 @@
+<template name='user_page'>
+  <div class='chapter-banner' style='color: {{profile.theme_colour}}'>
+    <p class='root_details_title' style='text-align: left;'><mw>{{username}}</mw></p>
+  </div>
+  <div style='padding-left: 20px;'>
+    <h1>Ta 的坑</h1><hr>
+    <mw>
+    {{#each tas_roots}}
+    {{> root_link data=this show_visits=true show_timestamp=true}}
+    {{/each}}
+    </mw>
+    <h1>Ta 的章节</h1><hr>
+    <mw>
+    {{#each tas_chapters}}
+    {{> chapter_link data=this}}
+    {{/each}}
+    </mw>
+  </div>
+</template>

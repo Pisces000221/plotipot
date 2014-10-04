@@ -45,7 +45,7 @@
   <br><br>
   选择一个要合并到这里的节点：<br>
   {{#each nodes_by_me}}
-    <a class='merge_submit' style='color: {{my_theme_colour}}' href='#' data-target-id='{{_id}}'><i class='fa fa-circle'></i> {{title}}</a><br>
+  {{> chapter_link data=this}}
   {{/each}}
 </template>
 

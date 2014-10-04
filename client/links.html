@@ -1,0 +1,18 @@
+<template name='root_link'>
+  <mw>
+    <h1><a href='{{pathFor "root_details" _id=data._id}}'>{{data.title}}</a></h1>
+    <span class='detailed_info'>创作者 {{author_name data}}
+      {{#if show_visits}}
+      &nbsp;| 访问 {{data.visits}} 次
+      {{/if}}
+      {{#if show_timestamp}}
+      &nbsp;| 创建于 {{timestamp_readable data}}
+      {{/if}}
+    </span>
+  </mw>
+  <p>{{{description_encoded data}}}</p><br>
+</template>
+
+<template name='chapter_link'>
+    <a class='merge_submit' style='color: {{my_theme_colour}}' href='{{pathFor "chapter" root_id=data.root_id _id=data._id}}' data-target-id='{{data._id}}'><i class='fa fa-circle'></i> {{root_title}} / {{data.title}}</a><br>
+</template>

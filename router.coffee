@@ -22,6 +22,11 @@ Router.map ->
     layoutTemplate: 'layout'
     yieldTemplates: 'header': to: 'top'
   # 传入id的页面
+  @route 'user_page',
+    path: '/user_page/:_id'
+    data: -> Meteor.users.findOne @params._id
+    layoutTemplate: 'layout'
+    yieldTemplates: 'header': to: 'top'
   @route 'root_details',
     path: '/root_details/:_id'
     data: ->

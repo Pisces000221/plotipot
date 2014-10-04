@@ -143,7 +143,6 @@ Template.merge_node.helpers
   'child_node_author': -> Meteor.users.findOne(Nodes.findOne(Session.get 'merging_child').author).username
   'child_node_title': -> Nodes.findOne(Session.get 'merging_child').title
   'nodes_by_me': -> Nodes.find author: Meteor.userId()
-  'my_theme_colour': -> Meteor.user().profile.theme_colour
 
 Template.merge_node.events
   'click .merge_submit': (e) ->
