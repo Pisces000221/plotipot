@@ -6,26 +6,21 @@ Router.map ->
   @route 'home_page',
     path: '/'
     layoutTemplate: 'layout'
-    yieldTemplates:
-      'header': to: 'top'
+    yieldTemplates: 'header': to: 'top'
   @route 'register_page',
     path: '/register'
     layoutTemplate: 'layout'
-    yieldTemplates:
-      'header': to: 'top'
+    yieldTemplates: 'header': to: 'top'
   @route 'login_page',
     path: '/login'
     layoutTemplate: 'layout'
-    yieldTemplates:
-      'header': to: 'top'
+    yieldTemplates: 'header': to: 'top'
   @route 'explore',
     layoutTemplate: 'layout'
-    yieldTemplates:
-      'header': to: 'top'
+    yieldTemplates: 'header': to: 'top'
   @route 'new_root',
     layoutTemplate: 'layout'
-    yieldTemplates:
-      'header': to: 'top'
+    yieldTemplates: 'header': to: 'top'
   # 传入id的页面
   @route 'root_details',
     path: '/root_details/:_id'
@@ -33,8 +28,7 @@ Router.map ->
       Meteor.subscribe 'nodes', @params._id
       Roots.findOne @params._id
     layoutTemplate: 'layout'
-    yieldTemplates:
-      'header': to: 'top'
+    yieldTemplates: 'header': to: 'top'
   @route 'create_node',
     path: '/create_node/:root_id/:node_id'
     data: ->
@@ -44,8 +38,7 @@ Router.map ->
       if Meteor.isClient then Session.set 'forking_parent', @params.node_id
       Roots.findOne @params.root_id
     layoutTemplate: 'layout'
-    yieldTemplates:
-      'header': to: 'top'
+    yieldTemplates: 'header': to: 'top'
   @route 'merge_node',
     path: '/merge_node/:root_id/:node_id'
     data: ->
@@ -53,8 +46,7 @@ Router.map ->
       if Meteor.isClient then Session.set 'merging_child', @params.node_id
       Roots.findOne @params.root_id
     layoutTemplate: 'layout'
-    yieldTemplates:
-      'header': to: 'top'
+    yieldTemplates: 'header': to: 'top'
   @route 'chapter',
     path: '/chapter/:root_id/:_id'
     data: ->
@@ -63,5 +55,4 @@ Router.map ->
       # 丢给页面玩去
       Nodes.findOne @params._id
     layoutTemplate: 'layout'
-    yieldTemplates:
-      'header': to: 'top'
+    yieldTemplates: 'header': to: 'top'

@@ -107,10 +107,17 @@ draw_graph = (links, display) ->
       .text (d) -> display[d.name].title
 
 ######## 创建新节点的部分 ########
-editor = undefined
-Template.create_node.rendered = ->
-  editor = new Editor()
-  editor.render()
+window.editor = undefined
+# 直接加载GitHub上的历史文件，CSS保留在工程里面
+Template.create_node.created = ->
+  window.load_script 'https://raw.githubusercontent.com/Pisces000221/plotipot/b7858220774ee32bde20936a2869b011dbeed9d0/client/libs/editor.js'
+  window.load_script 'https://raw.githubusercontent.com/Pisces000221/plotipot/b7858220774ee32bde20936a2869b011dbeed9d0/client/libs/marked.js'
+  timer = window.setInterval ->
+    if Editor?
+      window.editor = new Editor()
+      window.editor.render()
+      window.clearInterval timer
+  , 500
 
 # 下面的方法会导致数据失去互动性(reactivity)
 #parent_id = -> if @parent_id? then @parent_id else @parent_id = Session.get 'forking_parent'
@@ -124,7 +131,7 @@ Template.create_node.events
     Meteor.call 'create_node',
       root_id: @_id
       title: document.getElementById('title').value
-      contents: editor.codemirror.getValue()
+      contents: window.editor.codemirror.getValue()
     , (err, result) ->
       # result是新创建的节点的id
       if err? then alert err.toString(); return
