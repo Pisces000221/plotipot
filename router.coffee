@@ -46,6 +46,15 @@ Router.map ->
     layoutTemplate: 'layout'
     yieldTemplates:
       'header': to: 'top'
+  @route 'merge_node',
+    path: '/merge_node/:root_id/:node_id'
+    data: ->
+      Meteor.subscribe 'nodes', @params.root_id
+      if Meteor.isClient then Session.set 'merging_child', @params.node_id
+      Roots.findOne @params.root_id
+    layoutTemplate: 'layout'
+    yieldTemplates:
+      'header': to: 'top'
   @route 'chapter',
     path: '/chapter/:root_id/:_id'
     data: ->

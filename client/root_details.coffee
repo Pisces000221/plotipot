@@ -115,9 +115,9 @@ Template.create_node.rendered = ->
 # 下面的方法会导致数据失去互动性(reactivity)
 #parent_id = -> if @parent_id? then @parent_id else @parent_id = Session.get 'forking_parent'
 Template.create_node.helpers
-  'forking_parent_node': -> (Session.get 'forking_parent') isnt '0'
-  'parent_node_author': -> (Meteor.users.findOne (Nodes.findOne (Session.get 'forking_parent')).author).username
-  'parent_node_title': -> (Nodes.findOne (Session.get 'forking_parent')).title
+  'forking_parent_node': -> Session.get('forking_parent') isnt '0'
+  'parent_node_author': -> Meteor.users.findOne(Nodes.findOne(Session.get 'forking_parent').author).username
+  'parent_node_title': -> Nodes.findOne(Session.get 'forking_parent').title
 
 Template.create_node.events
   'click #btn_newnode_submit': ->
@@ -131,3 +131,14 @@ Template.create_node.events
       parent_id = Session.get 'forking_parent'
       Meteor.call 'link_nodes', parent_id, result if parent_id isnt '0'
     Router.go '/root_details/' + @_id
+
+Template.merge_node.helpers
+  'child_node_author': -> Meteor.users.findOne(Nodes.findOne(Session.get 'merging_child').author).username
+  'child_node_title': -> Nodes.findOne(Session.get 'merging_child').title
+  'nodes_by_me': -> Nodes.find author: Meteor.userId()
+  'my_theme_colour': -> Meteor.user().profile.theme_colour
+
+Template.merge_node.events
+  'click .merge_submit': (e) ->
+    Meteor.call 'link_nodes', e.currentTarget.attributes['data-target-id'].value, Session.get 'merging_child'
+    Router.go '/root_details/' + @root_id

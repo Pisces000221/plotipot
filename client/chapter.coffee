@@ -5,3 +5,4 @@ Template.chapter.helpers
 
 Template.chapter.events
   'click #btn_fork': -> Router.go '/create_node/' + @root_id + '/' + @_id
+  'click #btn_merge': -> Router.go '/merge_node/' + @root_id + '/' + @_id

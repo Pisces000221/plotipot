@@ -39,6 +39,16 @@
   {{> footer}}
 </template>
 
+<template name='merge_node'>
+  {{> root_details_summary}}
+  (你正在向{{child_node_author}}创作的{{child_node_title}}合并分支)
+  <br><br>
+  选择一个要合并到这里的节点：<br>
+  {{#each nodes_by_me}}
+    <a class='merge_submit' style='color: {{my_theme_colour}}' href='#' data-target-id='{{_id}}'><i class='fa fa-circle'></i> {{title}}</a><br>
+  {{/each}}
+</template>
+
 <template name='root_details_summary'>
   <div class='chapter-banner'>
     <p class='root_details_title'><mw>{{title}}</mw></p>
