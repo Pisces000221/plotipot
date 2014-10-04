@@ -69,8 +69,8 @@ draw_graph = (links, display) ->
     .enter().append 'svg:marker'     # This section adds in the arrows
       .attr 'id', String
       .attr 'viewBox', '0 -5 10 10'
-      .attr 'refX', 15
-      .attr 'refY', -1.5
+      .attr 'refX', 29
+      .attr 'refY', -3
       .attr 'markerWidth', 6
       .attr 'markerHeight', 6
       .attr 'orient', 'auto'
@@ -94,7 +94,7 @@ draw_graph = (links, display) ->
 
   # add the nodes
   node.append 'circle'
-      .attr 'r', 5
+      .attr 'r', 18
 
   # add the text 
   node.append 'text'
