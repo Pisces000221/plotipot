@@ -24,6 +24,7 @@ Meteor.methods
       _id: Roots.find().count().toString()
       author: @userId
       visits: 0
+      liked_by: []
       timestamp: (new Date).getTime()
   # 开分支的方法调用
   'create_node': (options) ->
@@ -42,6 +43,7 @@ Meteor.methods
       children: []
       author: @userId
       visits: 0
+      liked_by: []
       timestamp: (new Date).getTime()
   # 把两个节点链接起来（其实就是“我要你们在一起”……）
   'link_nodes': (parent_id, child_id) ->

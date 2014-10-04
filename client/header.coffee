@@ -13,6 +13,7 @@ Template.registerHelper 'description_encoded', ->
   (html_encode @description).replace /\n/g, '<br>'
 Template.registerHelper 'author_name', -> Meteor.users.findOne(@author).username
 Template.registerHelper 'timestamp_readable', -> (new Date @timestamp).toLocaleString()
+Template.registerHelper 'likes', -> @liked_by.length
 
 Template.registerHelper 'logged_in', -> Meteor.userId()?
 Template.registerHelper 'logging_in', -> Meteor.loggingIn()

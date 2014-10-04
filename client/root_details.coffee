@@ -1,9 +1,11 @@
 Session.setDefault 'cur_root_id', ''
 
-Template.root_details.helpers
-  'my_nodes': ->
+Template.root_details_summary.helpers
+  'my_nodes_count': ->
     Session.set 'cur_root_id', @_id
-    Nodes.find()
+    Nodes.find().count()
+
+Template.root_details.helpers
   'cur_root_id': -> Session.get 'cur_root_id'
 
 Template.root_details.events
