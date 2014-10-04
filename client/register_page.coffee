@@ -1,10 +1,14 @@
 Session.setDefault 'register_err_msg', ''
+Session.setDefault 'jscolor_initialized', false
 
 check_password = ->
   # 检查两次密码是否相同
   same = document.getElementById('password_again').value is document.getElementById('password').value
   Session.set 'register_err_msg', if same then '' else '两次输入的密码不同，检查一下是否手抖'
   same
+
+Template.register_panel.created = ->
+  window.load_script '/jscolor/jscolor.js'
 
 Template.register_panel.events
   'blur #username': ->
@@ -17,14 +21,20 @@ Template.register_panel.events
     Accounts.createUser
       username: document.getElementById('username').value
       email: document.getElementById('email').value
-      password: document.getElementById('password').value, (err) ->
-        # 创建成功/失败时的回调
-        if err isnt undefined
-          Session.set 'register_err_msg', err.toString()
-        else
-          Session.set 'username', Meteor.user().username
-          Router.go '/'
+      password: document.getElementById('password').value
+      profile:
+        theme_colour: document.getElementById('theme_colour').value
+    ,(err) ->
+      # 创建成功/失败时的回调
+      if err isnt undefined
+        Session.set 'register_err_msg', err.toString()
+      else
+        Session.set 'username', Meteor.user().username
+        Router.go '/'
   'blur #password_again': -> check_password()
+  'focus #theme_colour': ->
+    jscolor.init() if not Session.get 'jscolor_initialized'
+    Session.set 'jscolor_initialized', true
   'click #btn_goto_login': -> Router.go '/login'
 
 Template.register_panel.helpers

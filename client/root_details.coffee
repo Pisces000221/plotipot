@@ -23,6 +23,7 @@ Template.root_details.rendered = ->
       links.push { source: node._id, target: node._id } if node.children.length is 0
       display[node._id] =
         title: node.title
+        colour: Meteor.users.findOne(node.author).profile.theme_colour ? '#ccc'
     # 必须要把Session.get放在外面，否则Meteor不会帮我们实时更新
     display['root_id'] = Session.get 'cur_root_id'
     draw_graph links, display
@@ -95,11 +96,14 @@ draw_graph = (links, display) ->
   # add the nodes
   node.append 'circle'
       .attr 'r', 18
+      .attr 'fill', (d) -> display[d.name].colour
+      .attr 'fill-opacity', 0.3
 
   # add the text 
   node.append 'text'
-      .attr 'x', 12
+      .attr 'x', 18
       .attr 'dy', '.35em'
+      .attr 'fill', (d) -> display[d.name].colour
       .text (d) -> display[d.name].title
 
 ######## 创建新节点的部分 ########
