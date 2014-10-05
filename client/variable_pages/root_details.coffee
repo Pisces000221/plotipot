@@ -22,14 +22,16 @@ Template.root_details.events
 
 Template.root_details.rendered = ->
   @autorun ->
-    c = Nodes.find()
+    # That's my boy, Meteor! 终于来了一件令人爽透的事情了！
+    # Meteor可以自动判断哪些是需要的数据，不会在访问次数变化的时候乱更新
+    c = Nodes.find {}, fields: {_id: 1, children: 1, parents: 1, author: 1, title: 1}
     links = []
     display = []
     # http://stackoverflow.com/q/12956438
     # http://docs.meteor.com/#foreach
     c.forEach (node) ->
       links.push { source: node._id, target: child } for child in node.children
-      links.push { source: node._id, target: node._id } if node.children.length is 0
+      links.push { source: node._id, target: node._id } if node.parents.length is 0 and node.children.length is 0
       display[node._id] =
         title: node.title
         colour: Meteor.users.findOne(node.author).profile.theme_colour ? '#ccc'
