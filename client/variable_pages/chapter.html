@@ -1,7 +1,7 @@
 <template name='chapter'>
   {{inc_visits}}
   <div class='chapter-banner'>
-    <p class='root_details_title'><mw>{{root_title}}</mw></p>
+    <p class='root_details_title'><mw><a href='{{pathFor "root_details" _id=root_id}}'>{{root_title}}</a></mw></p>
     <div class='chapter-nav-left'><a data-am-collapse='{parent: "#parents_list_container"}' href='#parents_list'><i class='fa fa-chevron-left'></i> {{parents_count}}</a></div>
     <span class='chapter_title'>{{title}}</span>
     <div class='chapter-nav-right'><a data-am-collapse='{parent: "#children_list_container"}' href='#children_list'>{{children_count}} <i class='fa fa-chevron-right'></i></a></div>
