@@ -10,6 +10,9 @@ Meteor.methods
   'check_username_availability': (username) -> Meteor.users.find(username: username).count() is 0
   # TODO: Remove this before production
   'remove_all_users': () -> console.log "#{Meteor.users.find().count()} user(s) deleted"; Meteor.users.remove({})
+  # 访问计数器
+  'hit_root': (id) -> Roots.update id, $inc: visits: 1
+  'hit_chapter': (id) -> Nodes.update id, $inc: visits: 1
   # 开坑的方法调用
   # 使用数字作为数据库记录（文档）的id，两个方法均返回创建出来的id
   'create_root': (options) ->

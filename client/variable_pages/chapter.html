@@ -1,11 +1,15 @@
 <template name='chapter'>
+  {{inc_visits}}
   <div class='chapter-banner'>
     <p class='root_details_title'><mw>{{root_title}}</mw></p>
     <div class='chapter-nav-left'><a data-am-collapse='{parent: "#parents_list_container"}' href='#parents_list'><i class='fa fa-chevron-left'></i> {{parents_count}}</a></div>
     <span class='chapter_title'>{{title}}</span>
     <div class='chapter-nav-right'><a data-am-collapse='{parent: "#children_list_container"}' href='#children_list'>{{children_count}} <i class='fa fa-chevron-right'></i></a></div>
 
-    <br>作者 {{author_name}} / {{timestamp_readable}}<br>&nbsp;
+    <p>
+      作者 {{> user_link data=author}} / {{timestamp_readable}}<br>
+      {{visits}}次访问 / {{likes}}赞
+    </p>
     <div class='chapter-nav-right'><mw>
       <button id='btn_fork' type='button' class='am-btn'><i class='fa fa-code-fork'></i> Fork</button>
       <button id='btn_merge' type='button' class='am-btn'><i class='fa fa-code-fork fa-rotate-180'></i> Merge</button>

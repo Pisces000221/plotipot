@@ -5,8 +5,17 @@ Template.root_details_summary.helpers
     Session.set 'cur_root_id', @_id
     Nodes.find().count()
 
+# Session.setDefault 'count_valid', true
+Template.root_details.rendered = -> Session.set 'count_valid', true
+
 Template.root_details.helpers
   'cur_root_id': -> Session.get 'cur_root_id'
+
+  'inc_visits': ->
+    if @_id and Session.get 'count_valid'
+      Meteor.call 'hit_root', @_id
+      Session.set 'count_valid', false
+    ''
 
 Template.root_details.events
   'click #btn_create_node': -> Router.go '/create_node/' + @_id + '/0'
