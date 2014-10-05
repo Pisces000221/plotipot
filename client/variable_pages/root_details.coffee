@@ -108,16 +108,10 @@ draw_graph = (links, display) ->
 
 ######## 创建新节点的部分 ########
 window.editor = undefined
-# 直接加载GitHub上的历史文件，CSS保留在工程里面
-Template.create_node.created = ->
-  window.load_script '/external/editor/editor.js'
-  window.load_script '/external/editor/marked.js'
-  timer = window.setInterval ->
-    if Editor?
-      window.editor = new Editor()
-      window.editor.render()
-      window.clearInterval timer
-  , 500
+
+Template.create_node.rendered = ->
+  window.editor = new Editor()
+  window.editor.render()
 
 # 下面的方法会导致数据失去互动性(reactivity)
 #parent_id = -> if @parent_id? then @parent_id else @parent_id = Session.get 'forking_parent'
