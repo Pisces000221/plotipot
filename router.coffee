@@ -30,6 +30,11 @@ Router.map ->
     data: -> Meteor.users.findOne @params._id
     layoutTemplate: 'layout'
     yieldTemplates: 'header': to: 'top'
+  @route 'tag_page',
+    path: '/tag/:_id'
+    data: -> Tags.findOne @params._id
+    layoutTemplate: 'layout'
+    yieldTemplates: 'header': to: 'top'
   @route 'root_details',
     path: '/root_details/:_id'
     data: ->

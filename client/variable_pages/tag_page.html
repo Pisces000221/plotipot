@@ -1,0 +1,10 @@
+<template name='tag_page'>
+  <div class='chapter-banner'>
+    <p class='root_details_title' style='text-align: left;'><mw>Tag: {{name}}</mw></p>
+  </div>
+  <div style='padding-left: 20px;'>
+    {{#each roots}}
+    {{> root_link data=current_root}}
+    {{/each}}
+  </div>
+</template>
