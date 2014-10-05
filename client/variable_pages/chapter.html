@@ -1,15 +1,37 @@
 <template name='chapter'>
   <div class='chapter-banner'>
     <p class='root_details_title'><mw>{{root_title}}</mw></p>
-    <div class='chapter-nav-left'><a><i class='fa fa-chevron-left'></i> {{parents_count}}</a></div>
+    <div class='chapter-nav-left'><a data-am-collapse='{parent: "#parents_list_container"}' href='#parents_list'><i class='fa fa-chevron-left'></i> {{parents_count}}</a></div>
     <span class='chapter_title'>{{title}}</span>
-    <div class='chapter-nav-right'><a>{{children_count}} <i class='fa fa-chevron-right'></i></a></div>
+    <div class='chapter-nav-right'><a data-am-collapse='{parent: "#children_list_container"}' href='#children_list'>{{children_count}} <i class='fa fa-chevron-right'></i></a></div>
+
     <br>作者 {{author_name}} / {{timestamp_readable}}<br>&nbsp;
     <div class='chapter-nav-right'><mw>
       <button id='btn_fork' type='button' class='am-btn'><i class='fa fa-code-fork'></i> Fork</button>
       <button id='btn_merge' type='button' class='am-btn'><i class='fa fa-code-fork fa-rotate-180'></i> Merge</button>
     </mw></div>
   </div>
+
+  <div id='parents_list_container'>
+    <div id='parents_list' class='am-panel am-panel-collapse am-collapse'>
+      <div class='am-panel-bd'>
+        {{#each parents}}
+        {{> chapter_link data=current_chapter}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+
+  <div id='children_list_container'>
+    <div id='children_list' class='am-panel am-panel-collapse am-collapse'>
+      <div class='am-panel-bd'>
+        {{#each children}}
+        {{> chapter_link data=current_chapter}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+
   <hr>
   <div class='chapter-contents'>
     {{#markdown}}{{contents}}{{/markdown}}
