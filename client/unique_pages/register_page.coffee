@@ -8,7 +8,7 @@ check_password = ->
   same
 
 Template.register_panel.created = ->
-  window.load_script '/jscolor/jscolor.js'
+  window.load_script '/external/jscolor/jscolor.js'
 
 Template.register_panel.events
   'blur #username': ->

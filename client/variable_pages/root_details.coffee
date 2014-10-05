@@ -110,8 +110,8 @@ draw_graph = (links, display) ->
 window.editor = undefined
 # 直接加载GitHub上的历史文件，CSS保留在工程里面
 Template.create_node.created = ->
-  window.load_script 'https://raw.githubusercontent.com/Pisces000221/plotipot/b7858220774ee32bde20936a2869b011dbeed9d0/client/libs/editor.js'
-  window.load_script 'https://raw.githubusercontent.com/Pisces000221/plotipot/b7858220774ee32bde20936a2869b011dbeed9d0/client/libs/marked.js'
+  window.load_script '/external/editor/editor.js'
+  window.load_script '/external/editor/marked.js'
   timer = window.setInterval ->
     if Editor?
       window.editor = new Editor()
