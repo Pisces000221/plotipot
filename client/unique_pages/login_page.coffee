@@ -9,7 +9,9 @@ Template.login_page.events
       else
         Session.set 'login_err_msg', ''
         Session.set 'username', Meteor.user().username
-        Router.go '/'
+        return_to = window.location.search
+        return_to = return_to.substr(return_to.indexOf('=') + 1)
+        Router.go unescape return_to
 
 Template.login_panel.helpers
   'err_message': -> Session.get 'login_err_msg'
