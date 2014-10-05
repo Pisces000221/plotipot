@@ -6,3 +6,4 @@ Meteor.publish 'nodes', (id) ->
   if id.charAt(0) is '.' then Nodes.find author: id.substr(1)
   else Nodes.find root_id: id
 Meteor.publish 'all_users', -> Meteor.users.find {}, {fields: {profile: 1, username: 1}}
+Meteor.publish 'tags', -> Tags.find()

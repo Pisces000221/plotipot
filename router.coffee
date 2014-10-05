@@ -18,6 +18,9 @@ Router.map ->
   @route 'explore',
     layoutTemplate: 'layout'
     yieldTemplates: 'header': to: 'top'
+  @route 'tags',
+    layoutTemplate: 'layout'
+    yieldTemplates: 'header': to: 'top'
   @route 'new_root',
     layoutTemplate: 'layout'
     yieldTemplates: 'header': to: 'top'

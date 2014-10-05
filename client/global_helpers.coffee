@@ -9,6 +9,7 @@ Template.registerHelper 'description_encoded', (data = this) ->
 Template.registerHelper 'author', (data = this) -> Meteor.users.findOne data.author
 Template.registerHelper 'data_author', -> Meteor.users.findOne @data.author
 Template.registerHelper 'timestamp_readable', (data = this) -> (new Date data.timestamp).toLocaleString()
+Template.registerHelper 'tags_list', (data = this) -> data.tags.join(', ')
 Template.registerHelper 'likes', (data = this) -> data.liked_by.length
 
 Template.registerHelper 'logged_in', -> Meteor.userId()?

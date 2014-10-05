@@ -1,0 +1,22 @@
+<template name='tags'>
+  {{> banner_tags}}
+  <br><br>
+  {{> tags_display}}
+  <br><br>
+  {{> footer}}
+</template>
+
+<template name='banner_tags'>
+  <div class='banner-container' style='background-image: url(/images/banner_tags.svg)'>
+    <div class='title-big-mainpage'>标签</div>
+    <br>
+    <div class='title-small'>要找什么？看看这里有没有？</div>
+    <div style='padding-top: 80px;'></div>
+  </div>
+</template>
+
+<template name='tags_display'>
+  {{#each all_tags}}
+  <p>{{name}} / {{roots_count}}</p>
+  {{/each}}
+</template>

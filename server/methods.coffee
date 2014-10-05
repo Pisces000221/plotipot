@@ -21,13 +21,21 @@ Meteor.methods
     check options,
       title: NonEmptyString
       description: NonEmptyString
+      tags: Match.Optional([NonEmptyString])
+    options.tags ?= []
+    options.id = (Roots.find().count() + 1).toString()
+    for t in options.tags
+      d = Tags.findOne name: t
+      Tags.insert {_id: (Tags.find().count() + 1).toString(), name: t, roots: []} if not d?
+      Tags.update {name: t}, {$addToSet: roots: options.id}
     Roots.insert
       title: options.title
       description: options.description
-      _id: Roots.find().count().toString()
+      _id: options.id
       author: @userId
       visits: 0
       liked_by: []
+      tags: options.tags
       timestamp: (new Date).getTime()
   # 开分支的方法调用
   'create_node': (options) ->
@@ -41,7 +49,7 @@ Meteor.methods
       root_id: options.root_id
       title: options.title
       contents: options.contents
-      _id: Nodes.find().count().toString()
+      _id: (Nodes.find().count() + 1).toString()
       parents: []
       children: []
       author: @userId

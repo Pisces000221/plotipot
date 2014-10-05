@@ -3,3 +3,4 @@
 
 Roots = new Meteor.Collection('roots');
 Nodes = new Meteor.Collection('nodes');
+Tags = new Meteor.Collection('tags');
