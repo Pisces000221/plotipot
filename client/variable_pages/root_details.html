@@ -18,7 +18,7 @@
 <template name='create_node'>
   {{> root_details_summary}}
   {{#if forking_parent_node}}
-    (你正在从{{parent_node_author}}创作的{{parent_node_title}}创建新分支)
+    (你正在从{{> user_link data=parent_node_author}}创作的 {{parent_node_title}} 创建新分支)
   {{else}}
     (注意：你没有从任何节点创建分支，你的新节点将会非常孤独，不过你可以以后再把它和别的节点连接)
   {{/if}}
@@ -41,7 +41,7 @@
 
 <template name='merge_node'>
   {{> root_details_summary}}
-  (你正在向{{child_node_author}}创作的{{child_node_title}}合并分支)
+  (你正在向{{> user_link data=child_node_author}}创作的 {{child_node_title}} 合并分支)
   <br><br>
   选择一个要合并到这里的节点：<br>
   {{#each nodes_by_me}}
@@ -52,7 +52,7 @@
 <template name='root_details_summary'>
   <div class='chapter-banner'>
     <p class='root_details_title'><mw>{{title}}</mw></p>
-    由 {{author_name}} 开坑
+    由 {{> user_link data=author}} 开坑
     <br>诞生于 {{timestamp_readable}}
     <br>{{my_nodes_count}}个节点 / {{visits}}次访问 / {{likes}}赞
   </div>

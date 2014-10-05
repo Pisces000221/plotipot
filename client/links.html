@@ -1,7 +1,7 @@
 <template name='root_link'>
   <mw>
     <h1><a href='{{pathFor "root_details" _id=data._id}}'>{{data.title}}</a></h1>
-    <span class='detailed_info'>创作者 {{author_name data}}
+    <span class='detailed_info'>创作者 {{> user_link data=data_author}}
       {{#if show_visits}}
       &nbsp;| 访问 {{data.visits}} 次
       {{/if}}
@@ -14,5 +14,11 @@
 </template>
 
 <template name='chapter_link'>
-    <a class='merge_submit' style='color: {{my_theme_colour}}' href='{{pathFor "chapter" root_id=data.root_id _id=data._id}}' data-target-id='{{data._id}}'><i class='fa fa-circle'></i> {{root_title}} / {{data.title}}</a><br>
+  <mw>
+    <h1><a class='a-chapter' style='color: {{data_author.profile.theme_colour}}; padding-left: 20px;' href='{{pathFor "chapter" root_id=data.root_id _id=data._id}}' data-target-id='{{data._id}}'><i class='fa fa-circle'></i> {{root_title}} / {{data.title}}</a></h1>
+  </mw>
+</template>
+
+<template name='user_link'>
+  <a href='{{pathFor "user_page" _id=data._id}}' style='color: {{data.profile.theme_colour}};'>{{data.username}}</a>
 </template>

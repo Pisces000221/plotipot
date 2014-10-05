@@ -6,7 +6,8 @@ Session.setDefault 'username', ''
 # https://github.com/meteor/meteor/blob/master/packages/blaze/preamble.js
 Template.registerHelper 'description_encoded', (data = this) ->
   window.html_encode(data.description).replace /\n/g, '<br>'
-Template.registerHelper 'author_name', (data = this) -> Meteor.users.findOne(data.author).username
+Template.registerHelper 'author', (data = this) -> Meteor.users.findOne data.author
+Template.registerHelper 'data_author', -> Meteor.users.findOne @data.author
 Template.registerHelper 'timestamp_readable', (data = this) -> (new Date data.timestamp).toLocaleString()
 Template.registerHelper 'likes', (data = this) -> data.liked_by.length
 

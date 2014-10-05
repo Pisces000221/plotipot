@@ -123,7 +123,7 @@ Template.create_node.created = ->
 #parent_id = -> if @parent_id? then @parent_id else @parent_id = Session.get 'forking_parent'
 Template.create_node.helpers
   'forking_parent_node': -> Session.get('forking_parent') isnt '0'
-  'parent_node_author': -> Meteor.users.findOne(Nodes.findOne(Session.get 'forking_parent').author).username
+  'parent_node_author': -> Meteor.users.findOne Nodes.findOne(Session.get 'forking_parent').author
   'parent_node_title': -> Nodes.findOne(Session.get 'forking_parent').title
 
 Template.create_node.events
@@ -140,11 +140,11 @@ Template.create_node.events
     Router.go '/root_details/' + @_id
 
 Template.merge_node.helpers
-  'child_node_author': -> Meteor.users.findOne(Nodes.findOne(Session.get 'merging_child').author).username
+  'child_node_author': -> Meteor.users.findOne(Nodes.findOne(Session.get 'merging_child').author)
   'child_node_title': -> Nodes.findOne(Session.get 'merging_child').title
   'nodes_by_me': -> Nodes.find author: Meteor.userId()
 
 Template.merge_node.events
-  'click .merge_submit': (e) ->
+  'click .a-chapter': (e) ->
     Meteor.call 'link_nodes', e.currentTarget.attributes['data-target-id'].value, Session.get 'merging_child'
     Router.go '/root_details/' + @root_id
