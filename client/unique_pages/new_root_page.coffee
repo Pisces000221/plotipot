@@ -14,8 +14,8 @@ Template.new_root_panel.events
       title: document.getElementById('title').value
       description: document.getElementById('description').value
       tags: tags
-    , (err) ->
+    , (err, result) ->
       if err? then alert err.toString()
-      # TODO: 转到新建的坑的页面
-      else Router.go '/'
+      # result是创建的坑的id
+      else Router.go '/root_details/' + result
       Session.set 'new_root_in_progress', false
