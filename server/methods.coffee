@@ -39,6 +39,7 @@ Meteor.methods
       liked_by: []
       tags: options.tags
       timestamp: (new Date).getTime()
+      mainline: []
   # 开分支的方法调用
   'create_node': (options) ->
     if not @userId?
@@ -58,6 +59,7 @@ Meteor.methods
       visits: 0
       liked_by: []
       timestamp: (new Date).getTime()
+      comments: []
   # 把两个节点链接起来（其实就是“我要你们在一起”……）
   'link_nodes': (parent_id, child_id) ->
     # check parent_id, NodeID
