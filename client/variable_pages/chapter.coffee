@@ -1,6 +1,3 @@
-Session.setDefault 'count_valid', true
-Template.chapter.rendered = -> Session.set 'count_valid', true
-
 Template.chapter.helpers
   'root_title': -> Roots.findOne(@root_id).title
   'parents_count': -> @parents.length
@@ -8,9 +5,9 @@ Template.chapter.helpers
   'current_chapter': -> Nodes.findOne @toString()
 
   'inc_visits': ->
-    if @_id and Session.get 'count_valid'
+    if @_id and not Session.get('counted_chapter_' + @_id)
       Meteor.call 'hit_chapter', @_id
-      Session.set 'count_valid', false
+      Session.set ('counted_chapter_' + @_id), true
     ''
 
 Template.chapter.events

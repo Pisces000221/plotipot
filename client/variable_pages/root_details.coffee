@@ -5,16 +5,13 @@ Template.root_details_summary.helpers
     Session.set 'cur_root_id', @_id
     Nodes.find().count()
 
-# Session.setDefault 'count_valid', true
-Template.root_details.rendered = -> Session.set 'count_valid', true
-
 Template.root_details.helpers
   'cur_root_id': -> Session.get 'cur_root_id'
 
   'inc_visits': ->
-    if @_id and Session.get 'count_valid'
+    if @_id and not Session.get('counted_root_' + Session.get 'cur_root_id')
       Meteor.call 'hit_root', @_id
-      Session.set 'count_valid', false
+      Session.set ('counted_root_' + Session.get 'cur_root_id'), true
     ''
 
 Template.root_details.events
