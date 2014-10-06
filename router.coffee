@@ -21,6 +21,10 @@ Router.map ->
   @route 'tags',
     layoutTemplate: 'layout'
     yieldTemplates: 'header': to: 'top'
+  @route 'help_page',
+    path: '/help'
+    layoutTemplate: 'layout'
+    yieldTemplates: 'header': to: 'top'
   @route 'new_root',
     layoutTemplate: 'layout'
     yieldTemplates: 'header': to: 'top'

@@ -1,7 +1,7 @@
 <template name='root_details'>
   {{inc_visits}}
   {{> root_details_summary}}
-  <button id='btn_create_node' type='button' class='am-btn am-btn-primary'><i class='fa fa-plus'></i> 创建我的情节节点</button>
+  <button id='btn_create_node' type='button' class='am-btn am-btn-primary'><mw><i class='fa fa-plus'></i> Orphan Branch</mw></button>
   <svg id='d3_canvas'></svg>
   <!-- d3.js使用的样式 -->
   <style>
@@ -19,9 +19,9 @@
 <template name='create_node'>
   {{> root_details_summary}}
   {{#if forking_parent_node}}
-    (你正在从{{> user_link data=parent_node_author}}创作的 {{parent_node_title}} 创建新分支)
+    (正在从{{> user_link data=parent_node_author}}创作的 {{parent_node_title}} 创建分支) <a href='{{pathFor "help_page"}}'><i class='fa fa-question-circle'></i></a>
   {{else}}
-    (注意：你没有从任何节点创建分支，你的新节点将会非常孤独，不过你可以以后再把它和别的节点连接)
+    (注意：你没有从任何节点创建分支，将会出现一个孤立的节点，不过你可以以后再把它和别的节点连接) <a href='{{pathFor "help_page"}}'><i class='fa fa-question-circle'></i></a>
   {{/if}}
   <div class='am-g'>
     <div class='col-lg-9 col-md-8 col-sm-centered'>
