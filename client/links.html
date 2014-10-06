@@ -8,7 +8,7 @@
       {{#if show_timestamp}}
       &nbsp;| 创建于 {{timestamp_readable data}}
       {{/if}}
-      <br>标签：{{{tags_list data}}}
+      <br>标签：{{> tag_links data=data}}
     </span>
   </mw>
   <p>{{{description_encoded data}}}</p><br>
@@ -22,4 +22,10 @@
 
 <template name='user_link'>
   <a href='{{pathFor "user_page" _id=data._id}}' style='color: {{data.profile.theme_colour}};'><b>{{data.username}}</b></a>
+</template>
+
+<template name='tag_links'>
+  {{#each data.tags}}
+    <a class='am-badge' href='{{pathFor "tag_page" name=this}}' style='background-color: {{tag_colour this}}'>{{this}}</a>
+  {{/each}}
 </template>

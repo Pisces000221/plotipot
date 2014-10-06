@@ -31,8 +31,8 @@ Router.map ->
     layoutTemplate: 'layout'
     yieldTemplates: 'header': to: 'top'
   @route 'tag_page',
-    path: '/tag/:_id'
-    data: -> Tags.findOne @params._id
+    path: '/tag/:name'
+    data: -> Tags.findOne name: @params.name
     layoutTemplate: 'layout'
     yieldTemplates: 'header': to: 'top'
   @route 'root_details',

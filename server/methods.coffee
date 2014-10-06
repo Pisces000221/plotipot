@@ -26,7 +26,9 @@ Meteor.methods
     options.id = (Roots.find().count() + 1).toString()
     for t in options.tags
       d = Tags.findOne name: t
-      Tags.insert {_id: (Tags.find().count() + 1).toString(), name: t, roots: []} if not d?
+      # Please.js 生成随机颜色
+      colour = Please.make_color()  #'#b0cfd2'
+      Tags.insert {_id: (Tags.find().count() + 1).toString(), name: t, colour: colour, roots: []} if not d?
       Tags.update {name: t}, {$addToSet: roots: options.id}
     Roots.insert
       title: options.title

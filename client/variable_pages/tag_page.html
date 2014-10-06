@@ -1,7 +1,8 @@
 <template name='tag_page'>
-  <div class='chapter-banner'>
-    <p class='root_details_title' style='text-align: left;'><mw>Tag: {{name}}</mw></p>
-  </div>
+  <div class='chapter-banner' style='text-align: left;'><mw>
+    <span class='root_details_title'>Tag: </span><p class='am-badge root_details_title' style='background-color: {{tag_colour name}};'>{{name}}</p>
+    <p style='text-align: left;'>{{roots_count}} 个坑</p>
+  </mw></div>
   <div style='padding-left: 20px;'>
     {{#each roots}}
     {{> root_link data=current_root}}

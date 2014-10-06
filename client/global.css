@@ -65,11 +65,11 @@ span.chapter_title {
   font-weight: 700;
 }
 
-p.root_details_title {
+.root_details_title {
   font-size: 54px;
 }
 
-p.root_details_desc {
+.root_details_desc {
   font-size: 24px;
 }
 
