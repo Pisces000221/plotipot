@@ -17,6 +17,6 @@
 
 <template name='tags_display'>
   {{#each all_tags}}
-  <p>{{name}} / {{roots_count}}</p>
+    {{> tag_link data=name tag_size=cur_tag_size}}
   {{/each}}
 </template>

@@ -26,6 +26,10 @@
 
 <template name='tag_links'>
   {{#each data.tags}}
-    <a class='am-badge' href='{{pathFor "tag_page" name=this}}' style='background-color: {{tag_colour this}}'>{{this}}</a>
+    {{> tag_link data=this}}
   {{/each}}
+</template>
+
+<template name='tag_link'>
+    <a class='am-badge' href='{{pathFor "tag_page" name=data}}' style='background-color: {{tag_colour data}}; {{#if tag_size}}font-size: {{tag_size}}px;{{/if}}'>{{data}}</a>
 </template>
