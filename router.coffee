@@ -25,7 +25,7 @@ Router.map ->
     path: '/help'
     layoutTemplate: 'layout'
     yieldTemplates: 'header': to: 'top'
-  @route 'new_root',
+  @route 'new_pot',
     layoutTemplate: 'layout'
     yieldTemplates: 'header': to: 'top'
   # 传入id的页面
@@ -39,37 +39,37 @@ Router.map ->
     data: -> Tags.findOne name: @params.name
     layoutTemplate: 'layout'
     yieldTemplates: 'header': to: 'top'
-  @route 'root_details',
-    path: '/root_details/:_id'
+  @route 'pot_details',
+    path: '/pot_details/:_id'
     data: ->
-      Meteor.subscribe 'nodes', @params._id
-      Roots.findOne @params._id
+      Meteor.subscribe 'leaves', @params._id
+      Pots.findOne @params._id
     layoutTemplate: 'layout'
     yieldTemplates: 'header': to: 'top'
-  @route 'create_node',
-    path: '/create_node/:root_id/:node_id'
+  @route 'create_leaf',
+    path: '/create_leaf/:pot_id/:leaf_id'
     data: ->
-      Meteor.subscribe 'nodes', @params.root_id
+      Meteor.subscribe 'leaves', @params.pot_id
       # 目前只能把数据存储在Session里吗？？
       # 不能放在返回值里，否则会失去同步性（谁知道Meteor又干了什么坑爹的事情！）
-      if Meteor.isClient then Session.set 'forking_parent', @params.node_id
-      Roots.findOne @params.root_id
+      if Meteor.isClient then Session.set 'forking_parent', @params.leaf_id
+      Pots.findOne @params.pot_id
     layoutTemplate: 'layout'
     yieldTemplates: 'header': to: 'top'
-  @route 'merge_node',
-    path: '/merge_node/:root_id/:node_id'
+  @route 'merge_leaf',
+    path: '/merge_leaf/:pot_id/:leaf_id'
     data: ->
-      Meteor.subscribe 'nodes', @params.root_id
-      if Meteor.isClient then Session.set 'merging_child', @params.node_id
-      Roots.findOne @params.root_id
+      Meteor.subscribe 'leaves', @params.pot_id
+      if Meteor.isClient then Session.set 'merging_child', @params.leaf_id
+      Pots.findOne @params.pot_id
     layoutTemplate: 'layout'
     yieldTemplates: 'header': to: 'top'
-  @route 'chapter',
-    path: '/chapter/:root_id/:_id'
+  @route 'leaf',
+    path: '/leaf/:pot_id/:_id'
     data: ->
       # 拉出和它一起的所有章节……
-      Meteor.subscribe 'nodes', @params.root_id
+      Meteor.subscribe 'leaves', @params.pot_id
       # 丢给页面玩去
-      Nodes.findOne @params._id
+      Leaves.findOne @params._id
     layoutTemplate: 'layout'
     yieldTemplates: 'header': to: 'top'

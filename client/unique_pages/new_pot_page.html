@@ -1,13 +1,13 @@
-<template name='new_root'>
-  {{> banner_new_root}}
+<template name='new_pot'>
+  {{> banner_new_pot}}
   <br><br>
-  {{> new_root_panel}}
+  {{> new_pot_panel}}
   <br><br>
   {{> footer}}
 </template>
 
-<template name='banner_new_root'>
-  <div class='banner-container' style='background-image: url(/images/banner_new_root.svg)'>
+<template name='banner_new_pot'>
+  <div class='banner-container' style='background-image: url(/images/banner_new_pot.svg)'>
     <div class='title-big-mainpage'>开坑</div>
     <br>
     <div class='title-small'>你的文做好被各种奇葩情节充满的觉悟了吗？</div>
@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<template name='new_root_panel'>
+<template name='new_pot_panel'>
   <div class='am-g'>
     <div class='col-lg-9 col-md-8 col-sm-centered'>
       <form method='post' class='am-form'>
@@ -29,7 +29,7 @@
         <input type='text' name='' id='tags' value='' placeholder='用逗号或者点分隔，全半角均可'>
         <br>
         <div class='am-cf'>
-          <input type='button' name='' id='btn_newroot_submit' value='做好觉悟，走起！' class='am-btn am-btn-primary am-btn-sm am-fl'>
+          <input type='button' name='' id='btn_newpot_submit' value='做好觉悟，走起！' class='am-btn am-btn-primary am-btn-sm am-fl'>
           {{#if in_progress}}
           &nbsp;&nbsp;<i class='am-icon-spinner am-icon-spin'></i>
           {{/if}}

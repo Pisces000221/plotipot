@@ -1,6 +1,6 @@
-<template name='root_link'>
+<template name='pot_link'>
   <mw>
-    <h1><a href='{{pathFor "root_details" _id=data._id}}'>{{data.title}}</a></h1>
+    <h1><a href='{{pathFor "pot_details" _id=data._id}}'>{{data.title}}</a></h1>
     <span class='detailed_info'>创作者 {{> user_link data=data_author}}
       {{#if show_visits}}
       &nbsp;| 访问 {{data.visits}} 次
@@ -14,9 +14,9 @@
   <p>{{{description_encoded data}}}</p><br>
 </template>
 
-<template name='chapter_link'>
+<template name='leaf_link'>
   <mw>
-    <h1><a class='a-chapter' style='color: {{data_author.profile.theme_colour}}; padding-left: 20px;' href='{{pathFor "chapter" root_id=data.root_id _id=data._id}}' data-target-id='{{data._id}}'><i class='fa fa-circle'></i> {{root_title}} / {{data.title}}</a></h1>
+    <h1><a class='a-leaf' style='color: {{data_author.profile.theme_colour}}; padding-left: 20px;' href='{{pathFor "leaf" pot_id=data.pot_id _id=data._id}}' data-target-id='{{data._id}}'><i class='fa fa-circle'></i> {{pot_title}} / {{data.title}}</a></h1>
   </mw>
 </template>
 

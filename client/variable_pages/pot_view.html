@@ -1,7 +1,7 @@
-<template name='root_details'>
+<template name='pot_details'>
   {{inc_visits}}
-  {{> root_details_summary}}
-  <button id='btn_create_node' type='button' class='am-btn am-btn-primary'><mw><i class='fa fa-plus'></i> Orphan Branch</mw></button>
+  {{> pot_details_summary}}
+  <button id='btn_create_leaf' type='button' class='am-btn am-btn-primary'><mw><i class='fa fa-plus'></i> Orphan Branch</mw></button>
   <svg id='d3_canvas'></svg>
   <!-- d3.js使用的样式 -->
   <style>
@@ -16,10 +16,10 @@
   </style>
 </template>
 
-<template name='create_node'>
-  {{> root_details_summary}}
-  {{#if forking_parent_node}}
-    (正在从{{> user_link data=parent_node_author}}创作的 {{parent_node_title}} 创建分支) <a href='{{pathFor "help_page"}}'><i class='fa fa-question-circle'></i></a>
+<template name='create_leaf'>
+  {{> pot_details_summary}}
+  {{#if forking_parent_leaf}}
+    (正在从{{> user_link data=parent_leaf_author}}创作的 {{parent_leaf_title}} 创建分支) <a href='{{pathFor "help_page"}}'><i class='fa fa-question-circle'></i></a>
   {{else}}
     (注意：你没有从任何节点创建分支，将会出现一个孤立的节点，不过你可以以后再把它和别的节点连接) <a href='{{pathFor "help_page"}}'><i class='fa fa-question-circle'></i></a>
   {{/if}}
@@ -32,7 +32,7 @@
         <textarea class='' rows='5' id='contents'></textarea>
         <br>
         <div class='am-cf'>
-          <input type='button' name='' id='btn_newnode_submit' value='去吧我的分支！' class='am-btn am-btn-primary am-btn-sm am-fl'>
+          <input type='button' name='' id='btn_newleaf_submit' value='去吧我的分支！' class='am-btn am-btn-primary am-btn-sm am-fl'>
         </div>
       </form>
     </div>
@@ -40,25 +40,25 @@
   {{> footer}}
 </template>
 
-<template name='merge_node'>
-  {{> root_details_summary}}
-  (你正在向{{> user_link data=child_node_author}}创作的 {{child_node_title}} 合并分支)
+<template name='merge_leaf'>
+  {{> pot_details_summary}}
+  (你正在向{{> user_link data=child_leaf_author}}创作的 {{child_leaf_title}} 合并分支)
   <br><br>
   选择一个要合并到这里的节点：<br>
-  {{#each nodes_by_me}}
-  {{> chapter_link data=this}}
+  {{#each leaves_by_me}}
+  {{> leaf_link data=this}}
   {{/each}}
 </template>
 
-<template name='root_details_summary'>
-  <div class='chapter-banner'>
-    <p class='root_details_title'><mw>{{title}}</mw></p>
+<template name='pot_details_summary'>
+  <div class='leaf-banner'>
+    <p class='pot_details_title'><mw>{{title}}</mw></p>
     由 {{> user_link data=author}} 开坑
     <br>标签：{{> tag_links data=this}}
     <br>诞生于 {{timestamp_readable}}
-    <br>{{my_nodes_count}}个节点 / {{visits}}次访问 / {{likes}}赞
+    <br>{{my_leaves_count}}个节点 / {{visits}}次访问 / {{likes}}赞
   </div>
   <hr>
-  <p class='root_details_desc'>{{{description_encoded}}}</p>
+  <p class='pot_details_desc'>{{{description_encoded}}}</p>
   <hr>
 </template>

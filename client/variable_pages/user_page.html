@@ -1,15 +1,15 @@
 <template name='user_page'>
-  <div class='chapter-banner' style='color: {{profile.theme_colour}}'>
-    <p class='root_details_title' style='text-align: left;'><mw>{{username}}</mw></p>
+  <div class='leaf-banner' style='color: {{profile.theme_colour}}'>
+    <p class='pot_details_title' style='text-align: left;'><mw>{{username}}</mw></p>
   </div>
   <div style='padding-left: 20px;'>
     <h1>Ta 的坑</h1><hr>
-    {{#each tas_roots}}
-    {{> root_link data=this show_visits=true show_timestamp=true}}
+    {{#each tas_pots}}
+    {{> pot_link data=this show_visits=true show_timestamp=true}}
     {{/each}}
     <h1>Ta 的章节</h1><hr>
-    {{#each tas_chapters}}
-    {{> chapter_link data=this}}
+    {{#each tas_leafs}}
+    {{> leaf_link data=this}}
     {{/each}}
   </div>
 </template>

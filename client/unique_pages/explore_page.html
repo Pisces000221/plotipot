@@ -18,11 +18,11 @@
 <template name='explore_display'>
   <span class='title-small'><i class='fa fa-fire'></i> 时下最火 Top 5</span><hr>
   {{#each hottest_5}}
-  {{> root_link data=this show_visits=true}}
+  {{> pot_link data=this show_visits=true}}
   {{/each}}
   <br>
   <span class='title-small'><i class='fa fa-star'></i> 最新 Top 5</span><hr>
   {{#each newest_5}}
-  {{> root_link data=this show_timestamp=true}}
+  {{> pot_link data=this show_timestamp=true}}
   {{/each}}
 </template>

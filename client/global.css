@@ -60,37 +60,37 @@ span.detailed_info {
   color: #c0c0c0;
 }
 
-span.chapter_title {
+span.leaf_title {
   font-size: 32px;
   font-weight: 700;
 }
 
-.root_details_title {
+.pot_details_title {
   font-size: 54px;
 }
 
-.root_details_desc {
+.pot_details_desc {
   font-size: 24px;
 }
 
-.chapter-contents {
+.leaf-contents {
   padding-left: 20px;
   padding-right: 20px;
 }
 
-.chapter-nav-left {
+.leaf-nav-left {
   float: left;
   font-size: 32px;
   padding-left: 10px;
 }
 
-.chapter-nav-right {
+.leaf-nav-right {
   float: right;
   font-size: 32px;
   padding-right: 10px;
 }
 
-.chapter-banner {
+.leaf-banner {
   text-align: center;
   background-image: url(/images/lined_paper.png);
 }

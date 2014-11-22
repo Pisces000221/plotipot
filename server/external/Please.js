@@ -1,5 +1,5 @@
 /*!Please JS v0.3.0, Jordan Checkman 2014, Checkman.io, MIT License, Have fun.*/
-(function( globalName, root, factory ) {
+(function( globalName, pot, factory ) {
 	if ( typeof define === 'function' && define.amd ) {
 		define( [], factory );
 	}
@@ -7,7 +7,7 @@
 		module.exports = factory();
 	}
 	else{
-		root[globalName] = factory();
+		pot[globalName] = factory();
 	}
 }('Please', this, function(){
 	'use strict';

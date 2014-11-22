@@ -1,2 +1,2 @@
-Template.chapter_link.helpers
-  'root_title': -> Roots.findOne(@data.root_id).title
+Template.leaf_link.helpers
+  'pot_title': -> Pots.findOne(@data.pot_id).title

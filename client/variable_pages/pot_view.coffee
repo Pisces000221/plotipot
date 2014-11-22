@@ -1,39 +1,39 @@
-Session.setDefault 'cur_root_id', ''
+Session.setDefault 'cur_pot_id', ''
 
-Template.root_details_summary.helpers
-  'my_nodes_count': ->
-    Session.set 'cur_root_id', @_id
-    Nodes.find().count()
+Template.pot_details_summary.helpers
+  'my_leaves_count': ->
+    Session.set 'cur_pot_id', @_id
+    Leaves.find().count()
 
-Template.root_details.helpers
-  'cur_root_id': -> Session.get 'cur_root_id'
+Template.pot_details.helpers
+  'cur_pot_id': -> Session.get 'cur_pot_id'
 
   'inc_visits': ->
-    if @_id and not Session.get('counted_root_' + Session.get 'cur_root_id')
-      Meteor.call 'hit_root', @_id
-      Session.set ('counted_root_' + Session.get 'cur_root_id'), true
+    if @_id and not Session.get('counted_pot_' + Session.get 'cur_pot_id')
+      Meteor.call 'hit_pot', @_id
+      Session.set ('counted_pot_' + Session.get 'cur_pot_id'), true
     ''
 
-Template.root_details.events
-  'click #btn_create_node': -> Router.go '/create_node/' + @_id + '/0'
+Template.pot_details.events
+  'click #btn_create_leaf': -> Router.go '/create_leaf/' + @_id + '/0'
 
-Template.root_details.rendered = ->
+Template.pot_details.rendered = ->
   @autorun ->
     # That's my boy, Meteor! 终于来了一件令人爽透的事情了！
     # Meteor可以自动判断哪些是需要的数据，不会在访问次数变化的时候乱更新
-    c = Nodes.find {}, fields: {_id: 1, children: 1, parents: 1, author: 1, title: 1}
+    c = Leaves.find {}, fields: {_id: 1, children: 1, parents: 1, author: 1, title: 1}
     links = []
     display = []
     # http://stackoverflow.com/q/12956438
     # http://docs.meteor.com/#foreach
-    c.forEach (node) ->
-      links.push { source: node._id, target: child } for child in node.children
-      links.push { source: node._id, target: node._id } if node.parents.length is 0 and node.children.length is 0
-      display[node._id] =
-        title: node.title
-        colour: Meteor.users.findOne(node.author).profile.theme_colour ? '#ccc'
+    c.forEach (leaf) ->
+      links.push { source: leaf._id, target: child } for child in leaf.children
+      links.push { source: leaf._id, target: leaf._id } if leaf.parents.length is 0 and leaf.children.length is 0
+      display[leaf._id] =
+        title: leaf.title
+        colour: Meteor.users.findOne(leaf.author).profile.theme_colour ? '#ccc'
     # 必须要把Session.get放在外面，否则Meteor不会帮我们实时更新
-    display['root_id'] = Session.get 'cur_root_id'
+    display['pot_id'] = Session.get 'cur_pot_id'
     draw_graph links, display
 
 # 根据提供的信息画出树形图
@@ -99,7 +99,7 @@ draw_graph = (links, display) ->
     .enter().append 'g'
       .attr 'class', 'node'
       .call force.drag
-      .on 'dblclick', (d) -> Router.go "/chapter/#{display['root_id']}/#{d.name}"
+      .on 'dblclick', (d) -> Router.go "/leaf/#{display['pot_id']}/#{d.name}"
 
   # add the nodes
   node.append 'circle'
@@ -117,36 +117,36 @@ draw_graph = (links, display) ->
 ######## 创建新节点的部分 ########
 window.editor = undefined
 
-Template.create_node.rendered = ->
+Template.create_leaf.rendered = ->
   window.editor = new Editor()
   window.editor.render()
 
 # 下面的方法会导致数据失去互动性(reactivity)
 #parent_id = -> if @parent_id? then @parent_id else @parent_id = Session.get 'forking_parent'
-Template.create_node.helpers
-  'forking_parent_node': -> Session.get('forking_parent') isnt '0'
-  'parent_node_author': -> Meteor.users.findOne Nodes.findOne(Session.get 'forking_parent').author
-  'parent_node_title': -> Nodes.findOne(Session.get 'forking_parent').title
+Template.create_leaf.helpers
+  'forking_parent_leaf': -> Session.get('forking_parent') isnt '0'
+  'parent_leaf_author': -> Meteor.users.findOne Leaves.findOne(Session.get 'forking_parent').author
+  'parent_leaf_title': -> Leaves.findOne(Session.get 'forking_parent').title
 
-Template.create_node.events
-  'click #btn_newnode_submit': ->
-    Meteor.call 'create_node',
-      root_id: @_id
+Template.create_leaf.events
+  'click #btn_newleaf_submit': ->
+    Meteor.call 'create_leaf',
+      pot_id: @_id
       title: document.getElementById('title').value
       contents: window.editor.codemirror.getValue()
     , (err, result) ->
       # result是新创建的节点的id
       if err? then alert err.toString(); return
       parent_id = Session.get 'forking_parent'
-      Meteor.call 'link_nodes', parent_id, result if parent_id isnt '0'
-    Router.go '/root_details/' + @_id
+      Meteor.call 'link_leaves', parent_id, result if parent_id isnt '0'
+    Router.go '/pot_details/' + @_id
 
-Template.merge_node.helpers
-  'child_node_author': -> Meteor.users.findOne(Nodes.findOne(Session.get 'merging_child').author)
-  'child_node_title': -> Nodes.findOne(Session.get 'merging_child').title
-  'nodes_by_me': -> Nodes.find author: Meteor.userId()
+Template.merge_leaf.helpers
+  'child_leaf_author': -> Meteor.users.findOne(Leaves.findOne(Session.get 'merging_child').author)
+  'child_leaf_title': -> Leaves.findOne(Session.get 'merging_child').title
+  'leaves_by_me': -> Leaves.find author: Meteor.userId()
 
-Template.merge_node.events
-  'click .a-chapter': (e) ->
-    Meteor.call 'link_nodes', e.currentTarget.attributes['data-target-id'].value, Session.get 'merging_child'
-    Router.go '/root_details/' + @root_id
+Template.merge_leaf.events
+  'click .a-leaf': (e) ->
+    Meteor.call 'link_leaves', e.currentTarget.attributes['data-target-id'].value, Session.get 'merging_child'
+    Router.go '/pot_details/' + @pot_id

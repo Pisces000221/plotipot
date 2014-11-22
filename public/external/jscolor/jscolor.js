@@ -824,7 +824,7 @@ var jscolor = {
 				(THIS.pickerFace+THIS.pickerInset+y - Math.floor(jscolor.images.cross[1]/2)) + 'px';
 
 			// redraw the slider image
-			var seg = jscolor.picker.sld.childNodes;
+			var seg = jscolor.picker.sld.childLeaves;
 
 			switch(modeID) {
 				case 0:
