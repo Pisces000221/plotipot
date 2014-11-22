@@ -4,3 +4,4 @@
 Pots = new Meteor.Collection('pots');
 Leaves = new Meteor.Collection('leaves');
 Tags = new Meteor.Collection('tags');
+Comments = new Meteor.Collection('comments');

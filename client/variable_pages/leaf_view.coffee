@@ -10,10 +10,21 @@ loop_until = (func, intv) ->
 
 Template.leaf.rendered = ->
   @autorun ->
+    ###
     cmts = [
-      pos: { x: 0.3, y: 0.3 }, colour: '#F0F0F0', r: 10, opacity: 0.6
-      pos: { x: 0.5, y: 0.3 }, colour: '#C0C0FF', r: 20, opacity: 0.4
+      { pos: { x: 0.3, y: 0.3 }, colour: '#F0F0F0', r: 10, opacity: 0.6 },
+      { pos: { x: 0.5, y: 0.3 }, colour: '#C0C0FF', r: 20, opacity: 0.4 },
+      { pos: { x: 0.4, y: 0.4 }, colour: '#00C0FF', r: 21, opacity: 0.7 }
     ]
+    ###
+    # Meteor.call('post_comment',{leaf_id:'1',pos:{x:0.6,y:0.8},text:'abbb'})
+    cmts = []
+    Comments.find().forEach (c) ->
+      cmts.push
+        pos: c.pos
+        colour: Meteor.users.findOne(c.author).profile.theme_colour ? '#ccc'
+        r: Math.sqrt(c.text.length) * 3
+        opacity: Math.pow(moment().diff(moment(c.timestamp), 'days', true) + 1, -0.65)
     loop_until (-> draw_comments cmts), 500
 
 Template.leaf.helpers

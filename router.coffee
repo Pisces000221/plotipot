@@ -69,6 +69,8 @@ Router.map ->
     data: ->
       # 拉出和它一起的所有章节……
       Meteor.subscribe 'leaves', @params.pot_id
+      # 还有评论……
+      Meteor.subscribe 'comments', @params._id
       # 丢给页面玩去
       Leaves.findOne @params._id
     layoutTemplate: 'layout'

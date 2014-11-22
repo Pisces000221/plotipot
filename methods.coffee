@@ -6,6 +6,15 @@ RootID = Match.Where (x) ->
   check x, String
   (Pots.find x).count() is 1
 
+LeafID = Match.Where (x) ->
+  check x, String
+  (Leaves.find x).count() is 1
+
+Coordinate = Match.Where (p) ->
+  check p.x, Number
+  check p.y, Number
+  0 <= p.x <= 1 and 0 <= p.y <= 1
+
 Meteor.methods
   # 访问计数器
   'hit_pot': (id) -> Pots.update id, $inc: visits: 1
@@ -75,3 +84,20 @@ Meteor.methods
       throw new Meteor.Error 403, '本非同根生，相（连）何太急？？'
     Leaves.update parent_id, $addToSet: children: child_id
     Leaves.update child_id, $addToSet: parents: parent_id
+  # 写批注/发评论
+  'post_comment': (options) ->
+    if not @userId?
+      throw new Meteor.Error 403, '想发评论吗？登录就给你发'
+    check options,
+      leaf_id: LeafID
+      text: NonEmptyString
+      pos: Coordinate
+    new_id = Comments.insert
+      _id: (Comments.find().count() + 1).toString()
+      text: options.text
+      pos: options.pos
+      author: @userId
+      liked_by: []
+      timestamp: (new Date).getTime()
+    console.log new_id
+    Leaves.update options.leaf_id, $push: { comments: new_id }

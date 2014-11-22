@@ -7,3 +7,6 @@ Meteor.publish 'leaves', (id) ->
   else Leaves.find pot_id: id
 Meteor.publish 'all_users', -> Meteor.users.find {}, {fields: {profile: 1, username: 1}}
 Meteor.publish 'tags', -> Tags.find()
+Meteor.publish 'comments', (leaf_id) ->
+  s = Leaves.findOne(leaf_id).comments
+  Comments.find _id: { $in: s }
