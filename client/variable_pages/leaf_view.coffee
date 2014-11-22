@@ -1,3 +1,5 @@
+Session.setDefault 'posting_cmt', false
+
 # 可以在Web Console中使用以下命令调试：
 #   loop_until(function () { a++; console.log(a); return a >= 10; }, 500)
 #   a = 0
@@ -10,14 +12,6 @@ loop_until = (func, intv) ->
 
 Template.leaf.rendered = ->
   @autorun ->
-    ###
-    cmts = [
-      { pos: { x: 0.3, y: 0.3 }, colour: '#F0F0F0', r: 10, opacity: 0.6 },
-      { pos: { x: 0.5, y: 0.3 }, colour: '#C0C0FF', r: 20, opacity: 0.4 },
-      { pos: { x: 0.4, y: 0.4 }, colour: '#00C0FF', r: 21, opacity: 0.7 }
-    ]
-    ###
-    # Meteor.call('post_comment',{leaf_id:'1',pos:{x:0.6,y:0.8},text:'abbb'})
     cmts = []
     Comments.find().forEach (c) ->
       cmts.push
@@ -32,6 +26,7 @@ Template.leaf.helpers
   'parents_count': -> @parents.length
   'children_count': -> @children.length
   'current_leaf': -> Leaves.findOne @toString()
+  'posting_cmt': -> Session.get 'posting_cmt'
 
   'rendered_contents': -> marked @contents
 
@@ -50,7 +45,7 @@ draw_comments = (cmts) ->
   h = content_container.clientHeight
   if h is 0 then return false
   svg = d3.select '#comments_canvas'
-    .attr 'width', w
+    .attr 'width', w - 40 # TODO: use (w - padding-left - padding-right) instead
     .attr 'height', h
   for cmt in cmts
     svg.append 'circle'
@@ -62,3 +57,12 @@ draw_comments = (cmts) ->
 Template.leaf.events
   'click #btn_fork': -> Router.go "/create_leaf/#{@pot_id}/#{@_id}"
   'click #btn_merge': -> Router.go "/merge_leaf/#{@pot_id}/#{@_id}"
+  'click #btn_post_comment': -> Session.set 'posting_cmt', true
+  'click #comments_canvas': (e) ->
+    return if not Session.get 'posting_cmt'
+    a = document.getElementById 'cmt_post_area'
+    a.style.position = 'absolute'
+    if e.clientX < window.innerWidth / 2 then a.style.left = e.clientX + 'px'
+    else a.style.left = e.clientX - a.clientWidth + 'px'
+    a.style.top = e.clientY + 'px'
+    Session.set 'posting_cmt', false

@@ -94,3 +94,19 @@ span.leaf_title {
   text-align: center;
   background-image: url(/images/lined_paper.png);
 }
+
+.side-btn-container {
+  position: fixed;
+  bottom: 24px;
+  right: 72px;
+}
+
+.side-btn-highlight {
+  background-color: #514CDD;
+  color: #FFF;
+}
+
+.cmt-post-area {
+  width: 30%;
+  position: absolute;
+}

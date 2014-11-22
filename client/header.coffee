@@ -17,5 +17,5 @@ Template.header.created = ->
   #  <script type='text/javascript' src='/amazeui/zepto.min.js'></script>
   # staticfile.org上的Zepto不科学，最新版是1.0rc1……
   window.load_script 'http://cdn.staticfile.org/zepto/1.1.4/zepto.min.js'
-  window.load_script 'http://cdn.staticfile.org/amazeui/1.0.0-beta2/js/amazeui.min.js'
+  window.load_script 'http://cdn.amazeui.org/amazeui/1.0.1/js/amazeui.min.js'
   Session.set 'amazeui_js_loaded', 'absolutely'
