@@ -57,12 +57,22 @@ draw_comments = (cmts) ->
 Template.leaf.events
   'click #btn_fork': -> Router.go "/create_leaf/#{@pot_id}/#{@_id}"
   'click #btn_merge': -> Router.go "/merge_leaf/#{@pot_id}/#{@_id}"
-  'click #btn_post_comment': -> Session.set 'posting_cmt', true
+  'click #btn_start_post_comment': -> Session.set 'posting_cmt', true
   'click #comments_canvas': (e) ->
     return if not Session.get 'posting_cmt'
     a = document.getElementById 'cmt_post_area'
+    c = document.getElementById 'contents'
+    a.style.visibility = 'visible'
     a.style.position = 'absolute'
     if e.clientX < window.innerWidth / 2 then a.style.left = e.clientX + 'px'
     else a.style.left = e.clientX - a.clientWidth + 'px'
+    @selected_pos = x: (e.clientX - c.offsetLeft) / c.clientWidth, y: (e.clientY - c.offsetTop) / c.clientHeight
+    console.log @selected_pos
     a.style.top = e.clientY + 'px'
+  'click #btn_post_comment': ->
+    return if not Session.get 'posting_cmt'
+    Meteor.call 'post_comment', { leaf_id: @_id, text: document.getElementById('txt_comment').value, pos: @selected_pos }
+    document.getElementById('txt_comment').value = ''
+    Meteor.subscribe 'comments', @toString()
+    document.getElementById('cmt_post_area').style.visibility = 'hidden'
     Session.set 'posting_cmt', false

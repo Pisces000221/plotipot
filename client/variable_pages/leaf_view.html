@@ -47,12 +47,12 @@
     {{{rendered_contents}}}
   </div>
 
-  <div class='am-g cmt-post-area' id='cmt_post_area'>
+  <div class='am-g cmt-post-area' id='cmt_post_area' style='visibility: hidden'>
     <div class='am-col'>
       <div class='am-input-group'>
-        <input type='text' class='am-form-field'>
+        <input id='txt_comment' type='text' class='am-form-field'>
         <span class='am-input-group-btn'>
-          <button class='am-btn am-btn-default' type='button'><span class='am-icon-check'></span> </button>
+          <button id='btn_post_comment' class='am-btn am-btn-default' type='button'><span class='am-icon-check'></span> </button>
         </span>
       </div>
     </div>
@@ -62,7 +62,7 @@
     {{#if posting_cmt}}
       <span style='float: left'><h1>在文章任意位置点击&nbsp;</h1></span>
     {{/if}}
-    <a id='btn_post_comment' title='有话说……' class='am-icon-btn am-icon-comment am-active {{#if posting_cmt}}side-btn-highlight{{/if}}' style='cursor: pointer;'></a>
+    <a id='btn_start_post_comment' title='有话说……' class='am-icon-btn am-icon-comment am-active {{#if posting_cmt}}side-btn-highlight{{/if}}' style='cursor: pointer;'></a>
   </div>
 
   {{> footer}}
