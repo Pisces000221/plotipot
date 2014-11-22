@@ -53,9 +53,8 @@
 <template name='pot_details_summary'>
   <div class='leaf-banner'>
     <p class='pot_details_title'><mw>{{title}}</mw></p>
-    由 {{> user_link data=author}} 开坑
+    由 {{> user_link data=author}} 开坑 / {{timestamp_readable}}
     <br>标签：{{> tag_links data=this}}
-    <br>诞生于 {{timestamp_readable}}
     <br>{{my_leaves_count}}个节点 / {{visits}}次访问 / {{likes}}赞
   </div>
   <hr>

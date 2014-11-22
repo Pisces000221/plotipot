@@ -1,6 +1,8 @@
 ######## 全局helpers ########
 Session.setDefault 'username', ''
 
+moment.locale 'zh-cn'
+
 # Blaze你又调皮了～～～～只把< > &之类的给HTML编码一下，就是不编码换行符～～
 # 要不下次给Meteor发个PR过去？
 # https://github.com/meteor/meteor/blob/master/packages/blaze/preamble.js
@@ -8,7 +10,7 @@ Template.registerHelper 'description_encoded', (data = this) ->
   window.html_encode(data.description).replace /\n/g, '<br>'
 Template.registerHelper 'author', (data = this) -> Meteor.users.findOne data.author
 Template.registerHelper 'data_author', -> Meteor.users.findOne @data.author
-Template.registerHelper 'timestamp_readable', (data = this) -> (new Date data.timestamp).toLocaleString()
+Template.registerHelper 'timestamp_readable', (data = this) -> moment(new Date data.timestamp).calendar()
 Template.registerHelper 'tag_colour', (data = this) -> Tags.findOne(name: data).colour
 Template.registerHelper 'likes', (data = this) -> data.liked_by.length
 
