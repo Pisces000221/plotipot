@@ -4,6 +4,8 @@ Template.chapter.helpers
   'children_count': -> @children.length
   'current_chapter': -> Nodes.findOne @toString()
 
+  'rendered_contents': -> marked @contents
+
   'inc_visits': ->
     if @_id and not Session.get('counted_chapter_' + @_id)
       Meteor.call 'hit_chapter', @_id
