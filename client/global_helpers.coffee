@@ -44,3 +44,9 @@ window.html_encode = (s) ->
   div = document.createElement 'div'
   div.appendChild document.createTextNode s
   div.innerHTML
+
+window.hex_to_rgb = (hex) ->
+  if hex.charAt(0) is '#' then hex = hex.substr 1
+  r: parseInt hex.substr(0, 2), 16
+  g: parseInt hex.substr(2, 2), 16
+  b: parseInt hex.substr(4, 2), 16

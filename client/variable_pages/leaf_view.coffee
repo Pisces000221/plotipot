@@ -10,10 +10,14 @@ loop_until = (func, intv) ->
   ,intv
   return
 
+displayed_comments = []
+
 Template.leaf.rendered = ->
+  displayed_comments = []
   @autorun ->
     cmts = []
-    Comments.find().forEach (c) ->
+    Comments.find().forEach (c) -> if displayed_comments.indexOf(c._id) is -1
+      displayed_comments.push c._id
       cmts.push
         pos: c.pos
         colour: Meteor.users.findOne(c.author).profile.theme_colour ? '#ccc'
@@ -40,7 +44,6 @@ Template.leaf.helpers
 draw_comments = (cmts) ->
   # http://stackoverflow.com/questions/15615552
   # http://bl.ocks.org/mbostock/1087001
-  d3.select('#comments_canvas').selectAll('*').remove()
   content_container = document.getElementById 'contents'
   w = content_container.clientWidth
   h = content_container.clientHeight
@@ -50,7 +53,7 @@ draw_comments = (cmts) ->
     .attr 'height', h
   for cmt in cmts
     cir = svg.append 'circle'
-      .attr 'r', cmt.r
+      .attr 'r', 0
       .style 'opacity', cmt.opacity
       .attr 'cx', cmt.pos.x * w
       .attr 'cy', cmt.pos.y * h
@@ -58,21 +61,31 @@ draw_comments = (cmts) ->
       # http://stackoverflow.com/q/20635986
       # http://stackoverflow.com/q/11336251
       .on 'mouseover', ->
+        d3.select('#cmt_tip').transition().duration(300)
+          .style 'opacity', 1
+          .style 'visibility', 'visible'
         document.getElementById('cmt_tip_text').innerHTML = @tt
         # 更新文字位置
         c = document.getElementById 'contents'
         t = d3.select this
         cx = parseInt(t.attr 'cx')
         cy = parseInt(t.attr 'cy')
+        r = parseInt(t.attr 'r')
         tip = document.getElementById('cmt_tip')
-        tip.style.visibility = 'visible'
         if cx < window.innerWidth / 2 then tip.style.left = cx + 'px'
         else tip.style.left = cx - tip.clientWidth + 'px'
-        tip.style.top = cy + c.offsetTop + 10 + 'px'
+        tip.style.top = cy + c.offsetTop + r + 'px'
+        # 变色龙出动！！
+        rgbs = window.hex_to_rgb @colour
+        tip.style.backgroundColor = "rgba(#{rgbs.r}, #{rgbs.g}, #{rgbs.b}, 0.3)"
       .on 'mouseleave', ->
-        tip = document.getElementById('cmt_tip')
-        tip.style.visibility = 'hidden'
+        d3.select('#cmt_tip').transition().duration(200).style 'opacity', 0
+        setTimeout (-> document.getElementById('cmt_tip').style.visibility = 'hidden'), 200
+      # 动画
+      .transition().delay(Math.random() * 500)
+      .transition().duration(250).ease('quad-out').attr 'r', cmt.r
     cir[0][0].tt = cmt.text
+    cir[0][0].colour = cmt.colour
 
 Template.leaf.events
   'click #btn_fork': -> Router.go "/create_leaf/#{@pot_id}/#{@_id}"
