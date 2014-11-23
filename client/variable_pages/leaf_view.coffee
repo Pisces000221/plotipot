@@ -73,6 +73,6 @@ Template.leaf.events
     return if not Session.get 'posting_cmt'
     Meteor.call 'post_comment', { leaf_id: @_id, text: document.getElementById('txt_comment').value, pos: @selected_pos }
     document.getElementById('txt_comment').value = ''
-    Meteor.subscribe 'comments', @toString()
+    Meteor.subscribe 'comments', @_id
     document.getElementById('cmt_post_area').style.visibility = 'hidden'
     Session.set 'posting_cmt', false
