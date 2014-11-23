@@ -19,6 +19,7 @@ Template.leaf.rendered = ->
         colour: Meteor.users.findOne(c.author).profile.theme_colour ? '#ccc'
         r: Math.sqrt(c.text.length) * 3
         opacity: Math.pow(moment().diff(moment(c.timestamp), 'days', true) + 1, -0.65)
+        text: c.text
     loop_until (-> draw_comments cmts), 500
 
 Template.leaf.helpers
@@ -48,11 +49,30 @@ draw_comments = (cmts) ->
     .attr 'width', w - 40 # TODO: use (w - padding-left - padding-right) instead
     .attr 'height', h
   for cmt in cmts
-    svg.append 'circle'
+    cir = svg.append 'circle'
       .attr 'r', cmt.r
       .style 'opacity', cmt.opacity
-      .attr 'transform', "translate(#{cmt.pos.x * w},#{cmt.pos.y * h})"
+      .attr 'cx', cmt.pos.x * w
+      .attr 'cy', cmt.pos.y * h
       .attr 'fill', cmt.colour
+      # http://stackoverflow.com/q/20635986
+      # http://stackoverflow.com/q/11336251
+      .on 'mouseover', ->
+        document.getElementById('cmt_tip_text').innerHTML = @tt
+        # 更新文字位置
+        c = document.getElementById 'contents'
+        t = d3.select this
+        cx = parseInt(t.attr 'cx')
+        cy = parseInt(t.attr 'cy')
+        tip = document.getElementById('cmt_tip')
+        tip.style.visibility = 'visible'
+        if cx < window.innerWidth / 2 then tip.style.left = cx + 'px'
+        else tip.style.left = cx - tip.clientWidth + 'px'
+        tip.style.top = cy + c.offsetTop + 10 + 'px'
+      .on 'mouseleave', ->
+        tip = document.getElementById('cmt_tip')
+        tip.style.visibility = 'hidden'
+    cir[0][0].tt = cmt.text
 
 Template.leaf.events
   'click #btn_fork': -> Router.go "/create_leaf/#{@pot_id}/#{@_id}"
