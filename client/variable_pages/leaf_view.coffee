@@ -79,7 +79,8 @@ draw_comments = (cmts) ->
         tip.style.top = cy + c.offsetTop + r + 'px'
         # 变色龙出动！！
         rgbs = window.hex_to_rgb @colour
-        tip.style.backgroundColor = "rgba(#{rgbs.r}, #{rgbs.g}, #{rgbs.b}, 0.3)"
+        tip.style.backgroundColor = "rgba(#{rgbs.r}, #{rgbs.g}, #{rgbs.b}, 0.7)"
+        tip.style.color = if 0.213 * rgbs.r + 0.715 * rgbs.g + 0.072 * rgbs.b >= 0.5 then 'black' else 'white'
       .on 'mouseleave', ->
         d3.select('#cmt_tip').transition().duration(200).style 'opacity', 0
         setTimeout (-> document.getElementById('cmt_tip').style.visibility = 'hidden'), 200
@@ -105,9 +106,9 @@ Template.leaf.events
     if e.clientX < window.innerWidth / 2 then a.style.left = e.clientX + 'px'
     else a.style.left = e.clientX - a.clientWidth + 'px'
     # TODO: use c.padding-left instead of 20
-    @selected_pos = x: (e.clientX - 20) / cc.width.baseVal.value, y: (e.clientY - c.offsetTop) / cc.height.baseVal.value
+    @selected_pos = x: (e.clientX - 20) / cc.width.baseVal.value, y: (e.clientY - c.offsetTop + window.scrollY) / cc.height.baseVal.value
     console.log @selected_pos
-    a.style.top = e.clientY + 'px'
+    a.style.top = e.clientY + window.scrollY + 'px'
   'click #btn_post_comment': ->
     return if not Session.get 'posting_cmt'
     Meteor.call 'post_comment', { leaf_id: @_id, text: document.getElementById('txt_comment').value, pos: @selected_pos }

@@ -19,14 +19,15 @@
 <template name='create_leaf'>
   {{> pot_details_summary}}
   {{#if forking_parent_leaf}}
-    (正在从{{> user_link data=parent_leaf_author}}创作的 {{parent_leaf_title}} 创建分支) <a href='{{pathFor "help_page"}}'><i class='fa fa-question-circle'></i></a>
+    (正在从{{> user_link data=parent_leaf_author}}创作的 {{parent_leaf_title}} 创建分支)
   {{else}}
-    (注意：你没有从任何节点创建分支，将会出现一个孤立的节点，不过你可以以后再把它和别的节点连接) <a href='{{pathFor "help_page"}}'><i class='fa fa-question-circle'></i></a>
+    (Seed即为一个孤立的节点，你可以以后再把它和别的节点连接)
   {{/if}}
+  <a href='{{pathFor "help_page"}}'><i class='fa fa-question-circle'></i></a>
   <div class='am-g'>
     <div class='col-lg-9 col-md-8 col-sm-centered'>
       <form method='post' class='am-form'>
-        <label for='title'>章节标题</label>
+        <label for='title'>标题</label>
         <input type='text' name='' id='title' value=''>
         <br>
         <textarea class='' rows='5' id='contents'></textarea>
@@ -42,9 +43,9 @@
 
 <template name='merge_leaf'>
   {{> pot_details_summary}}
-  (你正在向{{> user_link data=child_leaf_author}}创作的 {{child_leaf_title}} 合并分支)
+  (你正在向{{> user_link data=child_leaf_author}}创作的 {{child_leaf_title}} 合并)
   <br><br>
-  选择一个要合并到这里的节点：<br>
+  要把神马合并过来？<br>
   {{#each leaves_by_me}}
   {{> leaf_link data=this}}
   {{/each}}
