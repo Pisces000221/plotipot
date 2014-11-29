@@ -33,6 +33,7 @@ Template.leaf.helpers
   'current_leaf': -> Leaves.findOne @toString()
   'liked': -> Leaves.findOne(@_id).liked_by.indexOf(Meteor.userId()) isnt -1
   'posting_cmt': -> Session.get 'posting_cmt'
+  'hidden_cmts': -> document.getElementById('comments_canvas').style.visibility is 'hidden'
 
   'rendered_contents': -> marked @contents
 
@@ -96,6 +97,9 @@ Template.leaf.events
   'click #btn_fork': -> Router.go "/create_leaf/#{@pot_id}/#{@_id}" if Meteor.userId()?
   'click #btn_merge': -> Router.go "/merge_leaf/#{@pot_id}/#{@_id}" if Meteor.userId()?
   'click #btn_start_post_comment': -> Session.set 'posting_cmt', not Session.get('posting_cmt')
+  'click #btn_hide_comments': ->
+    v = document.getElementById('comments_canvas')
+    v.style.visibility = if v.style.visibility is 'hidden' then 'visible' else 'hidden'
   'click #comments_canvas': (e) ->
     return if not Session.get 'posting_cmt'
     a = document.getElementById 'cmt_post_area'

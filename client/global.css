@@ -96,10 +96,15 @@ span.leaf_title {
   background-image: url(/images/lined_paper.png);
 }
 
+.am-icon-btn {
+  margin-bottom: 6px;
+}
+
 .side-btn-container {
   position: fixed;
   bottom: 24px;
   right: 72px;
+  text-align: right;
 }
 
 .side-btn-highlight {
