@@ -45,11 +45,12 @@ draw_comments = (cmts) ->
   # http://stackoverflow.com/questions/15615552
   # http://bl.ocks.org/mbostock/1087001
   content_container = document.getElementById 'contents'
-  w = content_container.clientWidth
+  # TODO: use (w - padding-left - padding-right) instead
+  w = content_container.clientWidth - 40
   h = content_container.clientHeight
   if h is 0 then return false
   svg = d3.select '#comments_canvas'
-    .attr 'width', w - 40 # TODO: use (w - padding-left - padding-right) instead
+    .attr 'width', w
     .attr 'height', h
   for cmt in cmts
     cir = svg.append 'circle'
@@ -90,16 +91,18 @@ draw_comments = (cmts) ->
 Template.leaf.events
   'click #btn_fork': -> Router.go "/create_leaf/#{@pot_id}/#{@_id}"
   'click #btn_merge': -> Router.go "/merge_leaf/#{@pot_id}/#{@_id}"
-  'click #btn_start_post_comment': -> Session.set 'posting_cmt', true
+  'click #btn_start_post_comment': -> Session.set 'posting_cmt', not Session.get('posting_cmt')
   'click #comments_canvas': (e) ->
     return if not Session.get 'posting_cmt'
     a = document.getElementById 'cmt_post_area'
     c = document.getElementById 'contents'
+    cc = document.getElementById 'comments_canvas'
     a.style.visibility = 'visible'
     a.style.position = 'absolute'
     if e.clientX < window.innerWidth / 2 then a.style.left = e.clientX + 'px'
     else a.style.left = e.clientX - a.clientWidth + 'px'
-    @selected_pos = x: (e.clientX - c.offsetLeft) / c.clientWidth, y: (e.clientY - c.offsetTop) / c.clientHeight
+    # TODO: use c.padding-left instead of 20
+    @selected_pos = x: (e.clientX - 20) / cc.width.baseVal.value, y: (e.clientY - c.offsetTop) / cc.height.baseVal.value
     console.log @selected_pos
     a.style.top = e.clientY + 'px'
   'click #btn_post_comment': ->
