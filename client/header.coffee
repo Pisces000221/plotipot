@@ -1,10 +1,12 @@
 Template.header.events
   'click #topbar_btn_register': -> Router.go '/register'
-  'click #topbar_btn_login': -> Router.go '/login?return_to=' + escape window.location.pathname
+  'click #topbar_btn_login': -> window.go_login()
   'click #topbar_btn_logout': -> Meteor.logout()
 
 # 由于Session会在每次页面重新加载时重设，我们用一个Session记录是否加载过AmazeUI
 Session.setDefault 'amazeui_js_loaded', 'of course not'
+
+window.go_login = -> Router.go '/login?return_to=' + escape window.location.pathname
 
 Template.header.created = ->
   # http://stackoverflow.com/questions/2741441/

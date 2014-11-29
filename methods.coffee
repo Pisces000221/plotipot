@@ -84,6 +84,15 @@ Meteor.methods
       throw new Meteor.Error 403, '本非同根生，相（连）何太急？？'
     Leaves.update parent_id, $addToSet: children: child_id
     Leaves.update child_id, $addToSet: parents: parent_id
+  # 爱就要大声说出来！！
+  'toggle_like_leaf': (leaf_id) ->
+    if not @userId?
+      throw new Meteor.Error 403, '想赞吗？登录就让你赞'
+    l = Leaves.findOne leaf_id
+    m = {}
+    if l.liked_by.indexOf(@userId) is -1 then m = $push: liked_by: @userId
+    else m = $pull: liked_by: @userId
+    Leaves.update leaf_id, m
   # 写批注/发评论
   'post_comment': (options) ->
     if not @userId?

@@ -31,6 +31,7 @@ Template.leaf.helpers
   'parents_count': -> @parents.length
   'children_count': -> @children.length
   'current_leaf': -> Leaves.findOne @toString()
+  'liked': -> Leaves.findOne(@_id).liked_by.indexOf(Meteor.userId()) isnt -1
   'posting_cmt': -> Session.get 'posting_cmt'
 
   'rendered_contents': -> marked @contents
@@ -89,8 +90,10 @@ draw_comments = (cmts) ->
     cir[0][0].colour = cmt.colour
 
 Template.leaf.events
-  'click #btn_fork': -> Router.go "/create_leaf/#{@pot_id}/#{@_id}"
-  'click #btn_merge': -> Router.go "/merge_leaf/#{@pot_id}/#{@_id}"
+  'click button': -> window.go_login() if not Meteor.userId()?
+  'click #btn_like': -> Meteor.call 'toggle_like_leaf', @_id if Meteor.userId()?
+  'click #btn_fork': -> Router.go "/create_leaf/#{@pot_id}/#{@_id}" if Meteor.userId()?
+  'click #btn_merge': -> Router.go "/merge_leaf/#{@pot_id}/#{@_id}" if Meteor.userId()?
   'click #btn_start_post_comment': -> Session.set 'posting_cmt', not Session.get('posting_cmt')
   'click #comments_canvas': (e) ->
     return if not Session.get 'posting_cmt'

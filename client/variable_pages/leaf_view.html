@@ -11,6 +11,11 @@
       {{visits}}次访问 / {{likes}}赞
     </p>
     <div class='leaf-nav-right'><mw>
+      {{#if liked}}
+      <button id='btn_like' type='button' class='am-btn am-btn-default'><i class='fa fa-thumbs-up'></i> Unlike</button>
+      {{else}}
+      <button id='btn_like' type='button' class='am-btn am-btn-success'><i class='fa fa-thumbs-o-up'></i> Like</button>
+      {{/if}}
       <button id='btn_fork' type='button' class='am-btn'><i class='fa fa-code-fork'></i> Fork</button>
       <button id='btn_merge' type='button' class='am-btn'><i class='fa fa-code-fork fa-rotate-180'></i> Merge</button>
     </mw></div>
