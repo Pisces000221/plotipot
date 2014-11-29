@@ -1,6 +1,8 @@
 Template.header.events
   'click #topbar_btn_register': -> Router.go '/register'
   'click #topbar_btn_login': -> window.go_login()
+  'click #topbar_btn_newpot': -> Router.go '/new_pot'
+  'click #topbar_btn_myprof': -> Router.go "/user_page/#{Meteor.userId()}"
   'click #topbar_btn_logout': -> Meteor.logout()
 
 # 由于Session会在每次页面重新加载时重设，我们用一个Session记录是否加载过AmazeUI
